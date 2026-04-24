@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.identity.ui.LoginController">
+   <children>
+      <ImageView fitHeight="629.0" fitWidth="1226.0" layoutX="-868.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/images/bg.jpg" />
+         </image></ImageView>
+      <AnchorPane layoutX="358.0" layoutY="-10.0" prefHeight="613.0" prefWidth="442.0">
+         <children>
+            <Label layoutX="79.0" layoutY="136.0" style="-fx-font-weight: bold;" text="Login">
+               <font>
+                  <Font name="Inter Semi Bold" size="35.0" />
+               </font>
+            </Label>
+            <Label layoutX="79.0" layoutY="187.0" text="Werlcome back user, login to your account to continue." textFill="#a16262">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="271.0" layoutY="388.0" text="Forgot password" textFill="#a16262">
+               <font>
+                  <Font name="Inter Regular" size="11.0" />
+               </font>
+            </Hyperlink>
+            <Button layoutX="104.0" layoutY="468.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #a16262; -fx-background-radius: 7px;" text="Login" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Inter Regular" size="13.0" />
+               </font>
+            </Button>
+            <Hyperlink layoutX="143.0" layoutY="517.0" text="Don't have account? Sign up" textFill="#a16262">
+               <font>
+                  <Font name="Inter Regular" size="11.0" />
+               </font>
+            </Hyperlink>
+            <VBox layoutX="64.0" layoutY="211.0" prefHeight="192.0" prefWidth="329.0" spacing="15.0">
+               <children>
+                  <Label style="-fx-font-weight: bold;" text="Username">
+                     <font>
+                        <Font name="Inter Semi Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="36.0" prefWidth="297.0" style="-fx-background-radius: 7px;">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font></TextField>
+                  <Label style="-fx-font-weight: bold;" text="Password">
+                     <font>
+                        <Font name="Inter Semi Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <PasswordField prefHeight="36.0" prefWidth="297.0" style="-fx-background-radius: 7px;">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font></PasswordField>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
