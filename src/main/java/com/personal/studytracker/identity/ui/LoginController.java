@@ -71,5 +71,22 @@ public class LoginController {
                 alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the signup page.");
             }
         }
+
+    @FXML
+    private void handleForgotPass() {
+        try {
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/identity/ui/forgot-password-view.fxml"));
+
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Study Tracker - Forgot Password");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the forgot password page.");
+        }
     }
+}
 
