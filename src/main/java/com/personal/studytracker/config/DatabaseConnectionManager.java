@@ -14,7 +14,6 @@ public class DatabaseConnectionManager {
 
         public static void initializeDbFile() {
             try (Connection conn  = getConnection()) {
-                System.out.println("Empty database file created/checked successfully!");
             } catch (SQLException e) {
                 System.err.println("Could not create database file: " + e.getMessage());
             }

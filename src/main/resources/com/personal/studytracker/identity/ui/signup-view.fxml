@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.identity.ui.SignupController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.identity.ui.SignupController">
     <children>
         <ImageView fitHeight="629.0" fitWidth="1226.0" layoutX="-868.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -30,7 +24,7 @@
                         <Font name="Inter Regular" size="12.0" />
                     </font>
                 </Label>
-                <Button layoutX="102.0" layoutY="491.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #a16262; -fx-background-radius: 7px;" text="Sign up" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                <Button layoutX="102.0" layoutY="491.0" mnemonicParsing="false" onAction="#signupProcess" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #a16262; -fx-background-radius: 7px;" text="Sign up" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font name="Inter Regular" size="13.0" />
                     </font>
@@ -47,7 +41,7 @@
                                 <Font name="Inter Semi Bold" size="13.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="36.0" prefWidth="297.0" promptText="Create your username" style="-fx-background-radius: 7px;">
+                        <TextField fx:id="createUsername" prefHeight="36.0" prefWidth="297.0" promptText="Create your username" style="-fx-background-radius: 7px;">
                             <font>
                                 <Font name="Inter Regular" size="13.0" />
                             </font></TextField>
@@ -56,7 +50,7 @@
                                 <Font name="Inter Semi Bold" size="13.0" />
                             </font>
                         </Label>
-                        <PasswordField prefHeight="36.0" prefWidth="297.0" promptText="Create your password" style="-fx-background-radius: 7px;">
+                        <PasswordField fx:id="createPassword" prefHeight="36.0" prefWidth="297.0" promptText="Create your password" style="-fx-background-radius: 7px;">
                             <font>
                                 <Font name="Inter Regular" size="13.0" />
                             </font></PasswordField>
@@ -65,7 +59,7 @@
                         <Font name="Inter Semi Bold" size="13.0" />
                      </font>
                   </Label>
-                  <PasswordField prefHeight="36.0" prefWidth="297.0" promptText="Confirm your password" style="-fx-background-radius: 7px;">
+                  <PasswordField fx:id="confirmPassword" prefHeight="36.0" prefWidth="297.0" promptText="Confirm your password" style="-fx-background-radius: 7px;">
                      <font>
                         <Font name="Inter Regular" size="13.0" />
                      </font>

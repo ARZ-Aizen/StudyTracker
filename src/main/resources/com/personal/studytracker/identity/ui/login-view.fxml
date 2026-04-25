@@ -29,12 +29,12 @@
                   <Font name="Inter Regular" size="11.0" />
                </font>
             </Hyperlink>
-            <Button layoutX="104.0" layoutY="468.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #a16262; -fx-background-radius: 7px;" text="Login" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="loginButton" layoutX="104.0" layoutY="468.0" mnemonicParsing="false" onAction="#loginProcess" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #a16262; -fx-background-radius: 7px;" text="Login" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Inter Regular" size="13.0" />
                </font>
             </Button>
-            <Hyperlink layoutX="143.0" layoutY="517.0" text="Don't have account? Sign up" textFill="#a16262">
+            <Hyperlink layoutX="143.0" layoutY="517.0" onAction="#handleSignup" text="Don't have account? Sign up" textFill="#a16262">
                <font>
                   <Font name="Inter Regular" size="11.0" />
                </font>
@@ -46,7 +46,7 @@
                         <Font name="Inter Semi Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="36.0" prefWidth="297.0" promptText="Enter your username" style="-fx-background-radius: 7px;">
+                  <TextField fx:id="usernameField" prefHeight="36.0" prefWidth="297.0" promptText="Enter your username" style="-fx-background-radius: 7px; -fx-focus-color: #a16262;;">
                      <font>
                         <Font name="Inter Regular" size="13.0" />
                      </font></TextField>
@@ -55,7 +55,7 @@
                         <Font name="Inter Semi Bold" size="13.0" />
                      </font>
                   </Label>
-                  <PasswordField prefHeight="36.0" prefWidth="297.0" promptText="Enter your password" style="-fx-background-radius: 7px;">
+                  <PasswordField fx:id="passwordField" prefHeight="36.0" prefWidth="297.0" promptText="Enter your password" style="-fx-background-radius: 7px; -fx-focus-color: #a16262;">
                      <font>
                         <Font name="Inter Regular" size="13.0" />
                      </font></PasswordField>
