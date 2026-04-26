@@ -16,5 +16,4 @@ public class alerts {
         }
         alert.showAndWait();
     }
-
 }

@@ -17,8 +17,8 @@ import java.sql.SQLException;
 
 public class LoginController {
 
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
+        @FXML private TextField usernameField;
+        @FXML private PasswordField passwordField;
 
     @FXML
     protected void loginProcess () {
@@ -32,6 +32,19 @@ public class LoginController {
 
         if (loginValidation(username, password)) {
             alerts.show(AlertType.INFORMATION, usernameField.getScene().getWindow(),"Success", "Login Successfully!");
+            try {
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/dashboard/ui/dashboard-view.fxml"));
+
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                stage.setTitle("Study Tracker");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the home page.");
+            }
         } else {
             alerts.show( AlertType.ERROR, usernameField.getScene().getWindow(),"Login Failed", "Invalid username or password");
         }

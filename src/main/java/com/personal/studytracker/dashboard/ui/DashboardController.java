@@ -1,14 +1,20 @@
 package com.personal.studytracker.dashboard.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import com.personal.studytracker.config.DatabaseConnectionManager;
+import com.personal.studytracker.utility.alerts;
+    import javafx.fxml.FXML;
+    import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DashboardController {
-    @FXML
-    private Label welcomeText;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 }

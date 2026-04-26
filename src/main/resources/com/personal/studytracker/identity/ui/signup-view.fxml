@@ -29,7 +29,7 @@
                         <Font name="Inter Regular" size="13.0" />
                     </font>
                 </Button>
-                <Hyperlink layoutX="163.0" layoutY="539.0" onAction="#handleLogin" text="Have an account? Log in" textFill="#a16262">
+                <Hyperlink layoutX="163.0" layoutY="539.0" onAction="#handleLogin" onDragDetected="#handleLogin" text="Have an account? Log in" textFill="#a16262">
                     <font>
                         <Font name="Inter Regular" size="11.0" />
                     </font>
@@ -41,7 +41,7 @@
                                 <Font name="Inter Semi Bold" size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="createUsername" prefHeight="40.0" prefWidth="297.0" promptText="Create your username" style="-fx-background-radius: 7px;">
+                        <TextField fx:id="createUsername" prefHeight="40.0" prefWidth="297.0" promptText="Create your username" style="-fx-background-radius: 7px; -fx-focus-color: #a16262;">
                             <font>
                                 <Font name="Inter Regular" size="13.0" />
                             </font></TextField>
@@ -50,7 +50,7 @@
                                 <Font name="Inter Semi Bold" size="13.0" />
                             </font>
                         </Label>
-                        <PasswordField fx:id="createPassword" prefHeight="40.0" prefWidth="297.0" promptText="Create your password" style="-fx-background-radius: 7px;">
+                        <PasswordField fx:id="createPassword" prefHeight="40.0" prefWidth="297.0" promptText="Create your password" style="-fx-background-radius: 7px; -fx-focus-color: #a16262;">
                             <font>
                                 <Font name="Inter Regular" size="13.0" />
                             </font></PasswordField>
@@ -59,7 +59,7 @@
                         <Font name="Inter Semi Bold" size="13.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="confirmPassword" prefHeight="40.0" prefWidth="297.0" promptText="Confirm your password" style="-fx-background-radius: 7px;">
+                  <PasswordField fx:id="confirmPassword" prefHeight="40.0" prefWidth="297.0" promptText="Confirm your password" style="-fx-background-radius: 7px; -fx-focus-color: #a16262;">
                      <font>
                         <Font name="Inter Regular" size="13.0" />
                      </font>
