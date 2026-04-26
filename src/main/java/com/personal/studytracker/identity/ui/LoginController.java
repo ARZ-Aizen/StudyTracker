@@ -39,6 +39,7 @@ public class LoginController {
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
                 stage.setTitle("Study Tracker");
+                stage.setResizable(true);
                 stage.show();
 
             } catch (IOException e) {
