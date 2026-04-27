@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class DatabaseConnectionManager {
 
     private static final String DATABASE_URL = "jdbc:sqlite:studytracker.db";
+
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL);
         }

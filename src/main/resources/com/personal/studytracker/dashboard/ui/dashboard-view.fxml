@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<SplitPane dividerPositions="0.2" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: -transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.DashboardController">
+<SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.DashboardController">
    <items>
       <AnchorPane maxWidth="220.0" minHeight="-Infinity" minWidth="220.0" prefHeight="726.0" prefWidth="220.0" style="-fx-background-color: #f4f5f7;">
          <children>
-            <VBox prefHeight="686.0" prefWidth="190.0" spacing="20.0" style="-fx-background-color: EDEDED; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
+            <VBox prefHeight="689.0" prefWidth="190.0" spacing="20.0" style="-fx-background-color: EDEDED; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
                <children>
                   <Label alignment="CENTER" prefWidth="190.0" style="-fx-font-weight: bold;" text="StudyTracker" textAlignment="CENTER">
                      <font>
@@ -31,7 +40,7 @@
                               <Insets bottom="5.0" left="15.0" />
                            </VBox.margin>
                         </Label>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Home">
+                        <Button fx:id="btnHome" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Home">
                            <graphic>
                               <FontIcon iconLiteral="fas-home" iconSize="16" />
                            </graphic>
@@ -41,8 +50,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Courses">
+                        <Button fx:id="btnCourses" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Courses">
                            <graphic>
                               <FontIcon iconLiteral="fas-book" iconSize="16" />
                            </graphic>
@@ -52,8 +64,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Tasks">
+                        <Button fx:id="btnTasks" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Tasks">
                            <graphic>
                               <FontIcon iconLiteral="fas-tasks" iconSize="16" />
                            </graphic>
@@ -63,8 +78,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Schedule">
+                        <Button fx:id="btnSchedule" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Schedule">
                            <graphic>
                               <FontIcon iconLiteral="fas-calendar-alt" iconSize="16" />
                            </graphic>
@@ -74,8 +92,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="History">
+                        <Button fx:id="btnHistory" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="History">
                            <graphic>
                               <FontIcon iconLiteral="fas-history" iconSize="16" />
                            </graphic>
@@ -85,6 +106,9 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
@@ -99,7 +123,7 @@
                               <Insets bottom="5.0" left="15.0" top="15.0" />
                            </VBox.margin>
                         </Label>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Settings">
+                        <Button fx:id="btnSettings" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Settings">
                            <graphic>
                               <FontIcon iconLiteral="fas-cog" iconSize="16" />
                            </graphic>
@@ -109,8 +133,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="About">
+                        <Button fx:id="btnAbout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="About">
                            <graphic>
                               <FontIcon iconLiteral="fas-question-circle" iconSize="16" />
                            </graphic>
@@ -120,8 +147,11 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Logout">
+                        <Button fx:id="btnLogout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Logout">
                            <graphic>
                               <FontIcon iconLiteral="fas-sign-out-alt" iconSize="16" />
                            </graphic>
@@ -131,6 +161,9 @@
                            <padding>
                               <Insets bottom="8.0" left="15.0" top="8.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
@@ -138,6 +171,138 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="851.0" />
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="851.0">
+         <children>
+            <StackPane fx:id="mainStackPane" prefHeight="726.0" prefWidth="845.0" style="-fx-background-color: #f4f5f7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="scheduleView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="historyView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="settingsView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="aboutView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <VBox spacing="20.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                           <children>
+                              <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="118.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;">
+                                             <children>
+                                                <Label style="-fx-font-weight: bold;" text="Hello user!">
+                                                   <font><Font name="Inter Semi Bold" size="30.0" /></font>
+                                                </Label>
+                                                <Label text="It's good to see you again." textFill="#666666">
+                                                   <font>
+                                                      <Font name="Inter Regular" size="12.0" />
+                                                   </font></Label>
+                                             </children>
+                                             <padding><Insets left="15.0" top="15.0" /></padding>
+                                          </VBox>
+
+                                          <GridPane hgap="15.0" vgap="15.0" VBox.vgrow="ALWAYS">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                   <children>
+                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Completion Rate" textFill="#a16262">
+                                                         <font><Font name="Inter Semi Bold" size="14.0" /></font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0%" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                                                </VBox>
+
+                                                <VBox alignment="CENTER_LEFT" prefWidth="171.0" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                   <children>
+                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Due Tasks" textFill="#a16262">
+                                                         <font>
+                                                            <Font name="Inter Semi Bold" size="14.0" />
+                                                         </font></Label>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                                                </VBox>
+
+                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Total Subjects" textFill="#a16262">
+                                                         <font>
+                                                            <Font name="Inter Semi Bold" size="14.0" />
+                                                         </font></Label>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                                                </VBox>
+
+                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Today's Date" textFill="#a16262">
+                                                         <font>
+                                                            <Font name="Inter Semi Bold" size="14.0" />
+                                                         </font></Label>
+                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+
+                                    <AnchorPane minWidth="300.0" prefWidth="374.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="14.0" text="Task Graph">
+                                             <font><Font name="Inter Regular" size="24.0" /></font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+
+                              <AnchorPane minHeight="200.0" prefHeight="330.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="History">
+                                       <font>
+                                          <Font name="Inter Regular" size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="courseView" prefHeight="200.0" prefWidth="200.0" visible="true">
+                     <children>
+                        <Button layoutX="35.0" layoutY="53.0" mnemonicParsing="false" text="Add Course">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <VBox layoutX="35.0" layoutY="95.0" prefHeight="612.0" prefWidth="784.0" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;">
+                           <children>
+                              <Pagination currentPageIndex="1" pageCount="10" prefHeight="616.0" prefWidth="784.0" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </children>
+            </StackPane>
+         </children></AnchorPane>
    </items>
 </SplitPane>
