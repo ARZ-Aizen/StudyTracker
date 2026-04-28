@@ -2,9 +2,11 @@ package com.personal.studytracker.dashboard.ui;
 
 import com.personal.studytracker.MainApplication;
 import com.personal.studytracker.utility.alerts;
+import com.personal.studytracker.utility.transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -70,20 +72,8 @@ public class DashboardController {
     }
 
     @FXML private void handleLogout() {
-        try {
-            Stage stage = (Stage) btnHome.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/identity/ui/login-view.fxml"));
-
-            Scene scene = new Scene(loader.load(    ));
-            stage.setScene(scene);
-            stage.setTitle("Study Tracker - login Up");
-            stage.centerOnScreen();
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            alerts.show(Alert.AlertType.ERROR, btnHome.getScene().getWindow(), "Navigation Error", "Could not load the login page.");
-        }
+        Parent root = btnHome.getScene().getRoot();
+        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login");
     }
-}
+    }
+

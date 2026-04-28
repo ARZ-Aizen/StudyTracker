@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+   <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.DashboardController">
    <items>

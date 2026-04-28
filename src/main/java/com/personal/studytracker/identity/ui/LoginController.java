@@ -2,8 +2,10 @@ package com.personal.studytracker.identity.ui;
 
 import com.personal.studytracker.config.DatabaseConnectionManager;
 import com.personal.studytracker.utility.alerts;
+import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -32,20 +34,8 @@ public class LoginController {
 
         if (loginValidation(username, password)) {
             alerts.show(AlertType.INFORMATION, usernameField.getScene().getWindow(),"Success", "Login Successfully!");
-            try {
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/dashboard/ui/dashboard-view.fxml"));
-
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.setTitle("Study Tracker");
-                stage.setResizable(true);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the home page.");
-            }
+            Parent root = usernameField.getScene().getRoot();
+            transition.effects(root, "/com/personal/studytracker/dashboard/ui/dashboard-view.fxml", "Study Tracker - Home");
         } else {
             alerts.show( AlertType.ERROR, usernameField.getScene().getWindow(),"Login Failed", "Invalid username or password");
         }
@@ -71,36 +61,17 @@ public class LoginController {
 
     @FXML
     private void handleSignup() {
-            try {
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/identity/ui/signup-view.fxml"));
+        Parent root = usernameField.getScene().getRoot();
+        transition.effects(root, "/com/personal/studytracker/identity/ui/signup-view.fxml", "Study Tracker - Sign Up");
+    }
 
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.setTitle("Study Tracker - Sign Up");
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the signup page.");
-            }
-        }
 
     @FXML
     private void handleForgotPass() {
-        try {
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/identity/ui/forgot-password-view.fxml"));
-
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Study Tracker - Forgot Password");
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            alerts.show(AlertType.ERROR, usernameField.getScene().getWindow(), "Navigation Error", "Could not load the forgot password page.");
-        }
+        Parent root = usernameField.getScene().getRoot();
+        transition.effects(root, "/com/personal/studytracker/identity/ui/forgot-password-view.fxml", "Study Tracker - Forgot Password");
     }
 }
+
+
 
