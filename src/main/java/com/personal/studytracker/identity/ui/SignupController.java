@@ -46,7 +46,7 @@ public class SignupController {
             handleLogin();
 
             Parent root = createUsername.getScene().getRoot();
-            transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login");
+            transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
 
         } else {
             alerts.show(AlertType.ERROR, createUsername.getScene().getWindow(), "Error", "Account Creation Failed");
@@ -74,7 +74,7 @@ public class SignupController {
     @FXML
     private void handleLogin() {
         Parent root = createUsername.getScene().getRoot();
-        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login");
+        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login",false);
     }
 }
 

@@ -35,7 +35,7 @@ public class LoginController {
         if (loginValidation(username, password)) {
             alerts.show(AlertType.INFORMATION, usernameField.getScene().getWindow(),"Success", "Login Successfully!");
             Parent root = usernameField.getScene().getRoot();
-            transition.effects(root, "/com/personal/studytracker/dashboard/ui/dashboard-view.fxml", "Study Tracker - Home");
+            transition.effects(root, "/com/personal/studytracker/dashboard/ui/dashboard-view.fxml", "Study Tracker - Home", true);
         } else {
             alerts.show( AlertType.ERROR, usernameField.getScene().getWindow(),"Login Failed", "Invalid username or password");
         }
@@ -62,14 +62,14 @@ public class LoginController {
     @FXML
     private void handleSignup() {
         Parent root = usernameField.getScene().getRoot();
-        transition.effects(root, "/com/personal/studytracker/identity/ui/signup-view.fxml", "Study Tracker - Sign Up");
+        transition.effects(root, "/com/personal/studytracker/identity/ui/signup-view.fxml", "Study Tracker - Sign Up", false);
     }
 
 
     @FXML
     private void handleForgotPass() {
         Parent root = usernameField.getScene().getRoot();
-        transition.effects(root, "/com/personal/studytracker/identity/ui/forgot-password-view.fxml", "Study Tracker - Forgot Password");
+        transition.effects(root, "/com/personal/studytracker/identity/ui/forgot-password-view.fxml", "Study Tracker - Forgot Password", false);
     }
 }
 

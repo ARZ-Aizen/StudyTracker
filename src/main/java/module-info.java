@@ -13,6 +13,7 @@ module com.personal.studytracker {
 
     opens com.personal.studytracker to javafx.fxml;
 
+    opens com.personal.studytracker.window to javafx.fxml;
     opens com.personal.studytracker.dashboard.ui to javafx.fxml;
     opens com.personal.studytracker.identity.ui to javafx.fxml;
     opens com.personal.studytracker.study.ui to javafx.fxml;

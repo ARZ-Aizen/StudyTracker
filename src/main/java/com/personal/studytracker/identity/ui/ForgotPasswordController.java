@@ -24,6 +24,6 @@ public class ForgotPasswordController {
     @FXML
     private void handleLogin() {
         Parent root = usernameField.getScene().getRoot();
-        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login");
+        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
     }
 }

@@ -27,6 +27,8 @@ public class DashboardController {
     private List<AnchorPane> allViews;
     private List<Button> allButtons;
 
+    //
+
     @FXML
     public void initialize() {
         allViews = List.of(homeView, courseView, taskView, scheduleView, historyView, settingsView, aboutView);
@@ -71,9 +73,18 @@ public class DashboardController {
         btn.setStyle("-fx-background-color: transparent; -fx-text-fill: black; -fx-cursor: hand;");
     }
 
+    //
+
     @FXML private void handleLogout() {
         Parent root = btnHome.getScene().getRoot();
-        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login");
+        transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
     }
+
+    //
+
+    @FXML private void courseAddButton() {
+        Parent root = btnHome.getScene().getRoot();
+        transition.popupEffects(root, "/com/personal/studytracker/window/course-add-view.fxml", "Study Tracker - Add Course");
     }
+}
 
