@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.DashboardController">
+<SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.dashboardController">
    <items>
       <AnchorPane maxWidth="220.0" minHeight="-Infinity" minWidth="220.0" prefHeight="726.0" prefWidth="220.0" style="-fx-background-color: #f4f5f7;">
          <children>

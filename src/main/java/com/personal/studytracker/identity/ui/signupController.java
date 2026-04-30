@@ -1,6 +1,6 @@
 package com.personal.studytracker.identity.ui;
 
-import com.personal.studytracker.config.DatabaseConnectionManager;
+import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.utility.alerts;
 import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SignupController {
+public class signupController {
 
     //
 
@@ -51,7 +51,7 @@ public class SignupController {
     private boolean signupCreation(String username, String password) {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
+        try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);

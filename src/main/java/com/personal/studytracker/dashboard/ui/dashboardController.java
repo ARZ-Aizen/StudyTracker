@@ -1,8 +1,9 @@
 package com.personal.studytracker.dashboard.ui;
 
-import com.personal.studytracker.config.DatabaseConnectionManager;
+import com.personal.studytracker.config.databaseConnectionManager;
+import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
-import com.personal.studytracker.window.SubjectCardController;
+import com.personal.studytracker.window.subjectCardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
-public class DashboardController {
+public class dashboardController {
 
     //
 
@@ -43,6 +44,8 @@ public class DashboardController {
     @FXML public void initialize() {
         allViews = List.of(homeView, courseView, taskView, scheduleView, historyView, settingsView, aboutView);
         allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnHistory, btnSettings, btnAbout);
+
+        helloUserHeader.setText("Hello, " + session.getUsername() + "!");
 
         homeView.setVisible(true);
         highlightButton(btnHome);
@@ -125,6 +128,7 @@ public class DashboardController {
     }
 
     @FXML private void handleLogout() {
+        session.clear();
         Parent root = btnHome.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
     }
@@ -152,9 +156,12 @@ public class DashboardController {
     public void loadCourse() {
         subjectListContainer.getChildren().clear();
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT subject, code FROM subject")) {
+        String query = "SELECT subject, code FROM subject WHERE user_id = ?";
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String name = rs.getString("subject");
@@ -163,7 +170,7 @@ public class DashboardController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/subject-card.fxml"));
                 HBox card = loader.load();
 
-                SubjectCardController cardController = loader.getController();
+                subjectCardController cardController = loader.getController();
                 cardController.setData(name, code);
 
                 cardController.setRefreshCallback(this::loadCourse);

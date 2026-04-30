@@ -1,8 +1,8 @@
 package com.personal.studytracker.window;
 
-import com.personal.studytracker.config.DatabaseConnectionManager;
-import com.personal.studytracker.dashboard.ui.DashboardController;
+import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.utility.alerts;
+import com.personal.studytracker.utility.session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -65,13 +65,14 @@ public class courseManage {
     }
 
     private boolean addSubject(String subjectName, String subjectCode) {
-        String sql = "INSERT INTO subject (subject, code) VALUES (?, ?)";
+        String sql = "INSERT INTO subject (subject, code, user_id) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
+        try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, subjectName);
             pstmt.setString(2, subjectCode);
+            pstmt.setInt(3, session.getUserId());
 
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
@@ -83,14 +84,15 @@ public class courseManage {
     }
 
     private boolean updateSubject(String newName, String newCode, String oldCode) {
-        String sql = "UPDATE subject SET subject = ?, code = ? WHERE code = ?";
+        String sql = "UPDATE subject SET subject = ?, code = ? WHERE code = ? AND user_id = ?" ;
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
+        try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, newName);
             pstmt.setString(2, newCode);
             pstmt.setString(3, oldCode);
+            pstmt.setInt(4, session.getUserId());
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {

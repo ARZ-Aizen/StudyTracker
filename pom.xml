@@ -108,7 +108,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.personal.studytracker.studytracker/com.personal.studytracker.MainApplication
+                                com.personal.studytracker.studytracker/com.personal.studytracker.studyTracker
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

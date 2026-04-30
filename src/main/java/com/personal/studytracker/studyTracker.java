@@ -1,6 +1,6 @@
     package com.personal.studytracker;
 
-    import com.personal.studytracker.config.DatabaseConnectionManager;
+    import com.personal.studytracker.config.databaseConnectionManager;
     import javafx.application.Application;
     import javafx.fxml.FXMLLoader;
     import javafx.scene.Scene;
@@ -9,16 +9,16 @@
 
 
 
-    public class MainApplication extends Application {
+    public class studyTracker extends Application {
 
         @Override
         public void init() throws Exception {
-            DatabaseConnectionManager.initializeDbFile();
+            databaseConnectionManager.initializeDbFile();
         }
 
         @Override
         public void start(Stage stage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("identity/ui/login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(studyTracker.class.getResource("identity/ui/login-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Study Tracker - Login");
             stage.setScene(scene);

@@ -1,6 +1,7 @@
 package com.personal.studytracker.identity.ui;
 
-import com.personal.studytracker.config.DatabaseConnectionManager;
+import com.personal.studytracker.config.databaseConnectionManager;
+import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.alerts;
 import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginController {
+public class loginController {
 
     //
 
@@ -41,16 +42,25 @@ public class LoginController {
     }
 
     private boolean loginValidation (String username, String password) {
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        String sql = "SELECT user_id, username FROM users WHERE username = ? AND password = ?";
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
+        try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            return rs.next();
+
+            if (rs.next()) {
+                int id = rs.getInt("user_id");
+                String name = rs.getString("username");
+
+                session.setSession(id, name);
+                return true;
+            }
+            return false;
+
 
         } catch (SQLException e) {
             e.printStackTrace();

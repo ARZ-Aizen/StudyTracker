@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class DatabaseConnectionManager {
+public class databaseConnectionManager {
 
     private static final String DATABASE_URL = "jdbc:sqlite:studytracker.db";
 
