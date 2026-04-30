@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.SubjectCardController">
+    <children>
+        <VBox HBox.hgrow="ALWAYS">
+            <children>
+                <Label id="cardSubjectName" fx:id="cardSubjectName" style="-fx-font-weight: bold; -fx-font-size: 16;" text="Subject Name">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font></Label>
+                <Label id="cardSubjectCode" fx:id="cardSubjectCode" style="-fx-font-size: 13;" text="CODE-101" textFill="#666666">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font></Label>
+            </children>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button id="btnEdit" fx:id="btnEdit" mnemonicParsing="false" onAction="#courseEditButton" prefHeight="29.0" prefWidth="62.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: #a16262; -fx-cursor: hand; -fx-background-radius: 5; -fx-border-color: #a16262; -fx-border-radius: 5;" text="Edit" textFill="#a16262">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font></Button>
+                <Button id="btnDelete" fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteCourse" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 5;" text="Delete">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font></Button>
+            </children>
+        </HBox>
+    </children>
+    <effect>
+        <DropShadow color="#0000001a" radius="10" />
+    </effect>
+</HBox>

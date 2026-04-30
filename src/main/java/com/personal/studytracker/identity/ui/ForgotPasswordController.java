@@ -17,12 +17,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class ForgotPasswordController {
 
+    //
+
     @FXML private TextField usernameField;
     @FXML private TextField answerField;
 
+    //
 
-    @FXML
-    private void handleLogin() {
+    @FXML private void handleLogin() {
         Parent root = usernameField.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
     }

@@ -166,11 +166,6 @@
          <children>
             <StackPane fx:id="mainStackPane" prefHeight="726.0" prefWidth="845.0" style="-fx-background-color: #f4f5f7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="scheduleView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="historyView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="settingsView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="aboutView" prefHeight="200.0" prefWidth="200.0" visible="false" />
                   <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <VBox spacing="20.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
@@ -181,7 +176,7 @@
                                        <children>
                                           <VBox prefHeight="118.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;">
                                              <children>
-                                                <Label style="-fx-font-weight: bold;" text="Hello user!">
+                                                <Label fx:id="helloUserHeader" style="-fx-font-weight: bold;" text="Hello user!">
                                                    <font><Font name="Inter Semi Bold" size="30.0" /></font>
                                                 </Label>
                                                 <Label text="It's good to see you again." textFill="#666666">
@@ -198,56 +193,53 @@
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
                                              <rowConstraints>
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                                                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                                              </rowConstraints>
                                              <children>
-                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Completion Rate" textFill="#a16262">
+                                                      <Label fx:id="completionRateLabel" style="-fx-font-weight: bold;" text="Completion Rate" textFill="#a16262">
                                                          <font><Font name="Inter Semi Bold" size="14.0" /></font>
                                                       </Label>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0%" VBox.vgrow="ALWAYS">
-                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      <Label fx:id="valCompletion" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0%" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER_LEFT" prefWidth="171.0" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Due Tasks" textFill="#a16262">
-                                                         <font>
-                                                            <Font name="Inter Semi Bold" size="14.0" />
-                                                         </font></Label>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
-                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      <Label fx:id="dueTasksLabel" style="-fx-font-weight: bold;" text="Due Tasks" textFill="#a16262">
+                                                         <font><Font name="Inter Semi Bold" size="14.0" /></font>
+                                                      </Label>
+                                                      <Label fx:id="valDue" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Total Subjects" textFill="#a16262">
-                                                         <font>
-                                                            <Font name="Inter Semi Bold" size="14.0" />
-                                                         </font></Label>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
-                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      <Label fx:id="totalSubjectsLabel" style="-fx-font-weight: bold;" text="Total Subjects" textFill="#a16262">
+                                                         <font><Font name="Inter Semi Bold" size="14.0" /></font>
+                                                      </Label>
+                                                      <Label fx:id="valTotal" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-font-weight: bold;" text="Today's Date" textFill="#a16262">
-                                                         <font>
-                                                            <Font name="Inter Semi Bold" size="14.0" />
-                                                         </font></Label>
-                                                      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="0" VBox.vgrow="ALWAYS">
-                                                         <font><Font name="Inter Regular" size="15.0" /></font>
+                                                      <Label fx:id="todayDateLabel" style="-fx-font-weight: bold;" text="Today's Date" textFill="#a16262">
+                                                         <font><Font name="Inter Semi Bold" size="14.0" /></font>
+                                                      </Label>
+                                                      <Label fx:id="valDate" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                         <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
@@ -279,25 +271,46 @@
                         </VBox>
                      </children>
                   </AnchorPane>
+
                   <AnchorPane fx:id="courseView" prefHeight="200.0" prefWidth="200.0" visible="true">
                      <children>
-                        <Button fx:id="courseAddButton" layoutX="35.0" layoutY="122.0" mnemonicParsing="false" onAction="#courseAddButton" style="-fx-background-color: #a16262;" text="Add Course" textFill="WHITE">
-                           <font>
-                              <Font name="Inter Regular" size="14.0" />
-                           </font>
-                        </Button>
-                        <VBox layoutX="35.0" layoutY="167.0" prefHeight="540.0" prefWidth="784.0" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;">
+                        <VBox spacing="15.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="30.0">
                            <children>
-                              <Pagination currentPageIndex="1" pageCount="10" prefHeight="616.0" prefWidth="784.0" />
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="courseTitleLabel" style="-fx-font-weight: bold;" text="Courses">
+                                       <font>
+                                          <Font name="Inter Semi Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="courseSubLabel" text="Edit your subjects to manage your task." textFill="#666666" />
+                                 </children>
+                              </VBox>
+                              <Button fx:id="courseAddButton" mnemonicParsing="false" onAction="#courseAddButton" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Add Course" textFill="WHITE">
+                                 <font>
+                                    <Font name="Inter Regular" size="14.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </VBox>
-                        <Label layoutX="35.0" layoutY="33.0" style="-fx-font-weight: bold;" text="Courses">
-                           <font>
-                              <Font name="Inter Semi Bold" size="30.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="35.0" layoutY="69.0" text="Edit your subjects to manage your task." textFill="#666666" />
-                     </children></AnchorPane>
+
+                        <VBox layoutY="177.0" prefHeight="519.0" prefWidth="785.0" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="177.0">
+                           <children>
+                              <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+                                 <content>
+                                    <VBox fx:id="subjectListContainer" spacing="10.0" style="-fx-padding: 10;" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="scheduleView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="historyView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="settingsView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="aboutView" prefHeight="200.0" prefWidth="200.0" visible="false" />
                </children>
             </StackPane>
          </children></AnchorPane>

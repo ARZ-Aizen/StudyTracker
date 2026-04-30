@@ -4,14 +4,10 @@ import com.personal.studytracker.config.DatabaseConnectionManager;
 import com.personal.studytracker.utility.alerts;
 import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,11 +15,14 @@ import java.sql.SQLException;
 
 public class LoginController {
 
-        @FXML private TextField usernameField;
-        @FXML private PasswordField passwordField;
+    //
 
-    @FXML
-    protected void loginProcess () {
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+
+    //
+
+    @FXML protected void loginProcess () {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -59,15 +58,13 @@ public class LoginController {
         }
     }
 
-    @FXML
-    private void handleSignup() {
+    @FXML private void handleSignup() {
         Parent root = usernameField.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/signup-view.fxml", "Study Tracker - Sign Up", false);
     }
 
 
-    @FXML
-    private void handleForgotPass() {
+    @FXML private void handleForgotPass() {
         Parent root = usernameField.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/forgot-password-view.fxml", "Study Tracker - Forgot Password", false);
     }
