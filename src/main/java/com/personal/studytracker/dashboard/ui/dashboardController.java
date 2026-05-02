@@ -36,17 +36,19 @@ public class dashboardController {
 
     //
 
+
+    //
+
     private List<AnchorPane> allViews;
     private List<Button> allButtons;
 
     //
 
-    @FXML public void initialize() {
+    @FXML
+    public void initialize() {
         allViews = List.of(homeView, courseView, taskView, scheduleView, historyView, settingsView, aboutView);
         allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnHistory, btnSettings, btnAbout);
-
         helloUserHeader.setText("Hello, " + session.getUsername() + "!");
-
         homeView.setVisible(true);
         highlightButton(btnHome);
 
@@ -59,12 +61,12 @@ public class dashboardController {
 
             responsive(w, courseTitleLabel, courseSubLabel, courseAddButton);
         });
-
     }
 
     //
 
-    @FXML private void handleMenu(ActionEvent event) {
+    @FXML
+    private void handleMenu(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String menuText = clickedButton.getText();
 
@@ -75,10 +77,15 @@ public class dashboardController {
 
         switch (menuText) {
             case "Home" -> showView(homeView);
-            case "Courses" ->  { showView(courseView); loadCourse(); }
-            case "Tasks" ->  showView(taskView);
+            case "Courses" -> {
+                showView(courseView);
+                loadCourse();
+            }
+            case "Tasks" -> {
+                showView(taskView);
+            }
             case "Schedule" -> showView(scheduleView);
-            case "History" ->  showView(historyView);
+            case "History" -> showView(historyView);
             case "Settings" -> showView(settingsView);
             case "About" -> showView(aboutView);
             case "Logout" -> handleLogout();
@@ -114,7 +121,7 @@ public class dashboardController {
                 "-fx-cursor: hand;");
     }
 
-    private void showView (AnchorPane view) {
+    private void showView(AnchorPane view) {
         view.setVisible(true);
         view.toFront();
     }
@@ -127,7 +134,8 @@ public class dashboardController {
         btn.setStyle("-fx-background-color: transparent; -fx-text-fill: black; -fx-cursor: hand;");
     }
 
-    @FXML private void handleLogout() {
+    @FXML
+    private void handleLogout() {
         session.clear();
         Parent root = btnHome.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
@@ -135,12 +143,13 @@ public class dashboardController {
 
     //
 
-    @FXML private void courseAddButton() {
+    @FXML
+    private void courseAddButton() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/course-add-view.fxml"));
             Parent root = loader.load();
-                Parent ownerRoot = btnHome.getScene().getRoot();
-                Stage popup = transition.popupWithRoot(ownerRoot, root, "Add Course");
+            Parent ownerRoot = btnHome.getScene().getRoot();
+            Stage popup = transition.popupWithRoot(ownerRoot, root, "Add Course");
 
             if (popup != null) {
                 popup.setOnHidden(e -> {

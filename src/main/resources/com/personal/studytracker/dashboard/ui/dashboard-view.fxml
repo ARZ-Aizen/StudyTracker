@@ -33,7 +33,7 @@
                         </Label>
                         <Button fx:id="btnHome" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Home">
                            <graphic>
-                              <FontIcon iconLiteral="fas-home" iconSize="16" />
+                              <FontIcon iconLiteral="fas-home" iconSize="16" text="" />
                            </graphic>
                            <font>
                               <Font name="Inter Regular" size="14.0" />
@@ -272,7 +272,7 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="courseView" prefHeight="200.0" prefWidth="200.0" visible="true">
+                  <AnchorPane fx:id="courseView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <VBox spacing="15.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -306,8 +306,84 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="scheduleView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="true">
+                     <children>
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="40.0">
+                           <children>
+                              <VBox prefHeight="53.0" prefWidth="264.0">
+                                 <children>
+                                    <Label fx:id="tasksTitleLabel" style="-fx-font-weight: bold;" text="Tasks">
+                                       <font>
+                                          <Font name="Inter Semi Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="tasksSubLabel" text="Edit the table to manage your workload." textFill="#666666" />
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="290.0" spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Add" textFill="WHITE">
+                                       <font>
+                                          <Font name="Inter Regular" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Edit" textFill="WHITE">
+                                       <font>
+                                          <Font name="Inter Regular" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Delete" textFill="WHITE">
+                                       <font>
+                                          <Font name="Inter Regular" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <VBox fx:id="tableContainer" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                                       <content>
+                                          <TableView fx:id="taskTable" editable="true" fixedCellSize="0.0" focusTraversable="false" prefWidth="773.0">
+                                             <columns>
+                                                <TableColumn fx:id="colName" maxWidth="1.7976931348623157E308" prefWidth="162.0" resizable="false" text="Task Name" />
+                                                <TableColumn fx:id="colSubject" maxWidth="1.7976931348623157E308" prefWidth="149.0" resizable="false" text="Subject" />
+                                                <TableColumn fx:id="colDeadline" maxWidth="1.7976931348623157E308" prefWidth="146.0" resizable="false" text="Deadline" />
+                                                <TableColumn fx:id="colPriority" maxWidth="1.7976931348623157E308" prefWidth="148.0" resizable="false" text="Priority" />
+                                                <TableColumn fx:id="colStatus" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="167.0" resizable="false" text="Status" />
+                                             </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </VBox>
+
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="scheduleView" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <VBox spacing="15.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="30.0" />
+                        <VBox layoutX="26.0" layoutY="30.0" prefHeight="676.0" prefWidth="795.0" spacing="30.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="scheduleTitleLabel" style="-fx-font-weight: bold;" text="Schedule">
+                                       <font>
+                                          <Font name="Inter Semi Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="scheduleSubLabel" text="View your subject schedule." textFill="#666666" />
+                                 </children>
+                              </VBox>
+      
+                              <VBox prefHeight="615.0" prefWidth="795.0" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+
                   <AnchorPane fx:id="historyView" prefHeight="200.0" prefWidth="200.0" visible="false" />
                   <AnchorPane fx:id="settingsView" prefHeight="200.0" prefWidth="200.0" visible="false" />
                   <AnchorPane fx:id="aboutView" prefHeight="200.0" prefWidth="200.0" visible="false" />
