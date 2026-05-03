@@ -3,7 +3,7 @@ package com.personal.studytracker.dashboard.ui;
 import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
-import com.personal.studytracker.window.subjectCardController;
+import com.personal.studytracker.window.subjectCard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +36,13 @@ public class dashboardController {
 
     //
 
+    @FXML private Label tasksTitleLabel, tasksSubLabel;
+    @FXML private Button addTaskButton;
+
+    //
+
+    @FXML private Label scheduleTitleLabel, scheduleSubLabel;
+    @FXML private Button addSchduleButton;
 
     //
 
@@ -46,20 +53,35 @@ public class dashboardController {
 
     @FXML
     public void initialize() {
+        //
         allViews = List.of(homeView, courseView, taskView, scheduleView, historyView, settingsView, aboutView);
         allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnHistory, btnSettings, btnAbout);
+
+        //
         helloUserHeader.setText("Hello, " + session.getUsername() + "!");
+
+        //
+        allViews.forEach(view -> view.setVisible(false));
         homeView.setVisible(true);
         highlightButton(btnHome);
 
+        //
         mainStackPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             double w = newVal.doubleValue();
 
+            //
             responsive(w, helloUserHeader,
                     List.of(completionRateLabel, dueTasksLabel, totalSubjectsLabel, todayDateLabel),
                     List.of(valCompletion, valDue, valTotal, valDate));
 
+            //
             responsive(w, courseTitleLabel, courseSubLabel, courseAddButton);
+
+            //
+            responsive(w, tasksTitleLabel, tasksSubLabel, addTaskButton);
+
+            //
+            responsive(w, scheduleTitleLabel, scheduleSubLabel, addSchduleButton);
         });
     }
 
@@ -179,7 +201,7 @@ public class dashboardController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/subject-card.fxml"));
                 HBox card = loader.load();
 
-                subjectCardController cardController = loader.getController();
+                subjectCard cardController = loader.getController();
                 cardController.setData(name, code);
 
                 cardController.setRefreshCallback(this::loadCourse);
@@ -193,5 +215,24 @@ public class dashboardController {
     }
 
     //
+
+    @FXML
+    private void scheduleAddButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/schedule-add-view.fxml"));
+            Parent root = loader.load();
+            Parent ownerRoot = btnHome.getScene().getRoot();
+            Stage popup = transition.popupWithRoot(ownerRoot, root, "Add Schedule");
+
+            if (popup != null) {
+                popup.setOnHidden(e -> {
+                    ownerRoot.setEffect(null);
+                    loadCourse();
+                });
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

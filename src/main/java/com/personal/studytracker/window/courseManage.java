@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

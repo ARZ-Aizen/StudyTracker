@@ -309,7 +309,7 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="true">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="40.0">
                            <children>
@@ -325,7 +325,7 @@
                               </VBox>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="290.0" spacing="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Add" textFill="WHITE">
+                                    <Button fx:id="addTaskButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Add" textFill="WHITE">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
@@ -365,7 +365,7 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="scheduleView" prefHeight="720.0" prefWidth="845.0" visible="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+                  <AnchorPane fx:id="scheduleView" prefHeight="720.0" prefWidth="845.0" visible="false" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                      <children>
                         <VBox spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -377,7 +377,7 @@
                                        </font>
                                     </Label>
                                     <Label fx:id="scheduleSubLabel" text="View your subject schedule." textFill="#666666" />
-                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Schedule" textFill="WHITE">
+                                    <Button fx:id="addSchduleButton" mnemonicParsing="false" onAction="#scheduleAddButton" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Schedule" textFill="WHITE">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
