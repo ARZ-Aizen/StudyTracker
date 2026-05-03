@@ -3,6 +3,7 @@ package com.personal.studytracker.dashboard.ui;
 import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
+import com.personal.studytracker.window.scheduleCard;
 import com.personal.studytracker.window.subjectCard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
@@ -43,6 +45,7 @@ public class dashboardController {
 
     @FXML private Label scheduleTitleLabel, scheduleSubLabel;
     @FXML private Button addSchduleButton;
+    @FXML private VBox scheduleListContainer;
 
     //
 
@@ -106,7 +109,10 @@ public class dashboardController {
             case "Tasks" -> {
                 showView(taskView);
             }
-            case "Schedule" -> showView(scheduleView);
+            case "Schedule" -> {
+                showView(scheduleView);
+                loadSchedules();
+            }
             case "History" -> showView(historyView);
             case "Settings" -> showView(settingsView);
             case "About" -> showView(aboutView);
@@ -234,5 +240,49 @@ public class dashboardController {
             e.printStackTrace();
         }
     }
+
+    private void addScheduleToUI(String name, String day, String start, String end) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/schedule-card.fxml"));
+            HBox card = loader.load();
+
+            scheduleCard controller = loader.getController();
+            controller.setData(name, day, start, end);
+
+            scheduleListContainer.getChildren().add(card);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSchedules() {
+        scheduleListContainer.getChildren().clear();
+
+        String sql = "SELECT s.day, s.start_time, s.end_time, sub.subject " +
+                "FROM schedule s " +
+                "JOIN subject sub ON s.subject_id = sub.id " +
+                "WHERE s.user_id = ?";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                addScheduleToUI(
+                        rs.getString("subject"),
+                        rs.getString("day"),
+                        rs.getString("start_time"),
+                        rs.getString("end_time")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 

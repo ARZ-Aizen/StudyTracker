@@ -26,7 +26,7 @@
                             </font></Label>
                     </children>
                 </VBox>
-            <ComboBox prefHeight="33.0" prefWidth="494.0" />
+            <ComboBox fx:id="subject" prefHeight="33.0" prefWidth="494.0" promptText="Select Course" />
 
                 <VBox spacing="5.0">
                     <children>
@@ -36,27 +36,27 @@
                             </font></Label>
                     </children>
                 </VBox>
-            <ComboBox prefHeight="35.0" prefWidth="480.0" />
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="61.0" prefWidth="235.0" spacing="20.0">
+            <ComboBox fx:id="day" prefHeight="35.0" prefWidth="480.0" promptText="Select Day" />
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="61.0" prefWidth="380.0" spacing="20.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0">
                      <children>
                         <Label text="Start Time">
                            <font>
                               <Font name="Inter Regular" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="35.0" prefWidth="150.0" />
+                        <ComboBox fx:id="startTime" prefHeight="35.0" prefWidth="197.0" promptText="Select Time" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="185.0">
                      <children>
                         <Label text="End Time">
                            <font>
                               <Font name="Inter Regular" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox prefHeight="35.0" prefWidth="150.0" />
+                        <ComboBox fx:id="endTime" prefHeight="35.0" prefWidth="150.0" promptText="Select Time" />
                      </children>
                   </VBox>
                </children>
@@ -64,7 +64,7 @@
       
               <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="435.0" spacing="20.0">
                   <children>
-                      <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #a16262;" text="Save" textFill="WHITE">
+                      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addProcess" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #a16262;" text="Save" textFill="WHITE">
                           <font>
                               <Font name="Inter Regular" size="14.0" />
                           </font>
