@@ -3,28 +3,27 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.controlsfx.control.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.courseManage">
+<AnchorPane prefHeight="342.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.courseManage">
     <children>
         <Label layoutX="34.0" layoutY="43.0" style="-fx-font-weight: bold;" text="Edit Course">
             <font>
                 <Font name="Inter Semi Bold" size="30.0" />
-            </font>
-        </Label>
-        <Label layoutX="34.0" layoutY="79.0" text="Customize your course details and schedule." textFill="#666666">
+            </font></Label>
+        <Label layoutX="34.0" layoutY="79.0" text="Customize your course and set its schedule." textFill="#666666">
             <font>
                 <Font name="Inter Regular" size="12.0" />
             </font>
         </Label>
 
-        <VBox layoutX="34.0" layoutY="117.0" prefHeight="435.0" prefWidth="435.0" spacing="15.0">
+        <VBox layoutX="34.0" layoutY="117.0" prefHeight="154.0" prefWidth="435.0" spacing="15.0">
             <children>
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Course Name">
-                            <font><Font name="Inter Regular" size="13.0" /></font>
-                        </Label>
+                            <font>
+                                <Font name="Inter Regular" size="13.0" />
+                            </font></Label>
                         <TextField fx:id="nameField" prefHeight="35.0" style="-fx-focus-color: #a16262; -fx-border-radius: 7px;" />
                     </children>
                 </VBox>
@@ -32,58 +31,25 @@
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Subject Code">
-                            <font><Font name="Inter Regular" size="13.0" /></font>
-                        </Label>
-                        <TextField fx:id="codeField" prefHeight="35.0" style="-fx-focus-color: #a16262; -fx-border-radius: 7px;" />
+                            <font>
+                                <Font name="Inter Regular" size="13.0" />
+                            </font></Label>
+                        <TextField fx:id="codeField" prefHeight="35.0" prefWidth="435.0" style="-fx-focus-color: #a16262; -fx-border-radius: 7px;" />
                     </children>
                 </VBox>
-
-                <Separator prefHeight="30.0" prefWidth="435.0" />
-
-                <Label text="Schedule Date">
-                    <font>
-                        <Font name="Inter Regular" size="13.0" />
-                    </font></Label>
-            <CheckComboBox prefHeight="35.0" prefWidth="435.0" />
-                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="71.0" prefWidth="376.0" spacing="20.0">
-                    <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="150.0">
-                            <children>
-                                <Label text="Start Time">
-                                    <font>
-                                        <Font name="Inter Regular" size="13.0" />
-                                    </font></Label>
-                                <ChoiceBox prefHeight="35.0" prefWidth="158.0" />
-                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="216.0">
-                            <children>
-                                <Label text="End Time">
-                                    <font>
-                                        <Font size="13.0" />
-                                    </font></Label>
-                                <ComboBox prefHeight="35.0" prefWidth="150.0" />
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-                <Label />
-
-
-
-                <HBox alignment="CENTER_LEFT" spacing="10.0" />
-            <Label />
             </children>
         </VBox>
 
-        <HBox alignment="CENTER" layoutX="210.0" layoutY="520.0" prefHeight="62.0" prefWidth="264.0" spacing="20.0">
+        <HBox alignment="CENTER" layoutX="206.0" layoutY="271.0" prefHeight="62.0" prefWidth="264.0" spacing="20.0">
             <children>
                 <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addProcess" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #a16262;" text="Save" textFill="WHITE">
-                    <font><Font name="Inter Regular" size="14.0" /></font>
-                </Button>
+                    <font>
+                        <Font name="Inter Regular" size="14.0" />
+                    </font></Button>
                 <Button fx:id="cancelButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelButton" prefHeight="40.0" prefWidth="120.0" text="Cancel">
-                    <font><Font name="Inter Regular" size="14.0" /></font>
-                </Button>
+                    <font>
+                        <Font name="Inter Regular" size="14.0" />
+                    </font></Button>
             </children>
         </HBox>
     </children>
