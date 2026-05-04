@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="416.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.scheduleManage">
+<AnchorPane prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.scheduleManage">
     <children>
         <Label layoutX="34.0" layoutY="43.0" style="-fx-font-weight: bold;" text="Add Schedule">
             <font>
@@ -26,7 +26,7 @@
                             </font></Label>
                     </children>
                 </VBox>
-            <ComboBox fx:id="subject" prefHeight="33.0" prefWidth="494.0" promptText="Select Course" />
+            <ComboBox fx:id="subject" prefHeight="35.0" prefWidth="480.0" promptText="Select Course" />
 
                 <VBox spacing="5.0">
                     <children>
@@ -37,19 +37,19 @@
                     </children>
                 </VBox>
             <ComboBox fx:id="day" prefHeight="35.0" prefWidth="480.0" promptText="Select Day" />
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="61.0" prefWidth="380.0" spacing="20.0">
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="87.0" prefWidth="401.0" spacing="20.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0" spacing="15.0">
                      <children>
                         <Label text="Start Time">
                            <font>
                               <Font name="Inter Regular" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="startTime" prefHeight="35.0" prefWidth="197.0" promptText="Select Time" />
+                        <ComboBox fx:id="startTime" prefHeight="35.0" prefWidth="150.0" promptText="Select Time" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="185.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="185.0" spacing="15.0">
                      <children>
                         <Label text="End Time">
                            <font>

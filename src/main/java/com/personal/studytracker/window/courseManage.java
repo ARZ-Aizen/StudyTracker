@@ -25,6 +25,14 @@ public class courseManage {
 
     //
 
+    public void setFields(String name, String code) {
+        nameField.setText(name);
+        codeField.setText(code);
+        this.originalCode = code;
+    }
+
+    //
+
     @FXML protected void addProcess() {
         String subjectName = nameField.getText();
         String subjectCode = codeField.getText();
@@ -39,13 +47,6 @@ public class courseManage {
             ((Stage) saveButton.getScene().getWindow()).close();
             }
         }
-
-
-    public void setFields(String name, String code) {
-        nameField.setText(name);
-        codeField.setText(code);
-        this.originalCode = code;
-    }
 
     @FXML protected void editProcess() {
         String newName = nameField.getText();
@@ -63,6 +64,8 @@ public class courseManage {
             alerts.show(Alert.AlertType.ERROR, saveButton.getScene().getWindow(), "Error", "Failed to update database.");
         }
     }
+
+    //
 
     private boolean addSubject(String subjectName, String subjectCode) {
         String sql = "INSERT INTO subject (subject, code, user_id) VALUES (?, ?, ?)";
@@ -100,6 +103,8 @@ public class courseManage {
             return false;
         }
     }
+
+    //
 
     @FXML private void cancelButton() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

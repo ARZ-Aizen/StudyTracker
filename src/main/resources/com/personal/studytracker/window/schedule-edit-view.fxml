@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="416.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.scheduleManage">
+<AnchorPane prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px; -fx-border-radius: 8px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.window.scheduleManage">
     <children>
         <Label layoutX="34.0" layoutY="43.0" style="-fx-font-weight: bold;" text="Edit Schedule">
             <font>
@@ -16,7 +16,7 @@
             </font>
         </Label>
 
-        <VBox layoutX="34.0" layoutY="117.0" prefHeight="315.0" prefWidth="435.0" spacing="15.0">
+        <VBox layoutX="34.0" layoutY="117.0" prefHeight="340.0" prefWidth="435.0" spacing="15.0">
             <children>
                 <VBox spacing="5.0">
                     <children>
@@ -26,7 +26,7 @@
                             </font></Label>
                     </children>
                 </VBox>
-            <ComboBox fx:id="subject" prefHeight="33.0" prefWidth="578.0" promptText="Select Course" />
+            <ComboBox fx:id="subject" prefHeight="35.0" prefWidth="480.0" promptText="Select Course" />
 
                 <VBox spacing="5.0">
                     <children>
@@ -37,9 +37,9 @@
                     </children>
                 </VBox>
                 <ComboBox fx:id="day" prefHeight="35.0" prefWidth="480.0" promptText="Select Day" />
-                <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="61.0" prefWidth="401.0" spacing="20.0">
+                <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="401.0" spacing="20.0">
                     <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0" spacing="15.0">
                             <children>
                                 <Label text="Start Time">
                                     <font>
@@ -49,7 +49,7 @@
                                 <ComboBox fx:id="startTime" prefHeight="35.0" prefWidth="150.0" promptText="Select Time" />
                             </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="150.0" spacing="15.0">
                             <children>
                                 <Label text="End Time">
                                     <font>
@@ -64,12 +64,12 @@
 
                 <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="264.0" spacing="20.0">
                     <children>
-                        <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #a16262;" text="Save" textFill="WHITE">
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#editProcess" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #a16262;" text="Save" textFill="WHITE">
                             <font>
                                 <Font name="Inter Regular" size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="cancelButton" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Cancel">
+                        <Button fx:id="cancelButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelButton" prefHeight="40.0" prefWidth="120.0" text="Cancel">
                             <font>
                                 <Font name="Inter Regular" size="14.0" />
                             </font>

@@ -8,10 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
@@ -26,170 +23,137 @@ public class scheduleManage {
 
     //
 
-    @FXML
-    public void initialize() {
+    private int editingScheduleId = -1;
 
-        int loggedInUserId = session.getUserId();
-            List<String> dbSubjects = getSubjectList(loggedInUserId);
-            subject.getItems().addAll(dbSubjects);
+    //
 
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    public void setFields(int id, String subName, String dayVal, String start, String end) {
+        this.editingScheduleId = id;
+        subject.setValue(subName);
+        day.setValue(dayVal);
+        startTime.setValue(start);
+        endTime.setValue(end);
 
-        List<String> timeSlots = generateTimeIntervals(5, 21, 5);
-
-        startTime.valueProperty().addListener((obs, oldVal, newVal) -> {
-            if (endTime.getValue() != null && newVal != null) {
-                if (!isTimeRangeValid(newVal, endTime.getValue())) {
-                    endTime.setValue(null);
-                }
-            }
-        });
-
-            startTime.getItems().addAll(timeSlots);
-            endTime.getItems().addAll(timeSlots);
-            day.getItems().addAll(days);
-    }
-
-    private List<String> generateTimeIntervals(int startHour, int endHour, int interval) {
-        List<String> times = new ArrayList<>();
-
-        for (int h = startHour; h <= endHour; h++) {
-            for (int m = 0; m < 60; m += interval) {
-                if (h == endHour && m > 0) break;
-
-                String period = (h < 12) ? "AM" : "PM";
-                int displayHour = h;
-                if (h > 12) displayHour = h - 12;
-                if (h == 0) displayHour = 12;
-
-                String time = String.format("%d:%02d %s", displayHour, m, period);
-                times.add(time);
-            }
+        if (saveButton != null) {
+            saveButton.setOnAction(e -> editProcess());
         }
-        return times;
     }
 
-    private List<String> getSubjectList(int currentUserId) {
-        List<String> subjects = new ArrayList<>();
-        String query = "SELECT subject FROM subject WHERE user_id = ?";
+    @FXML public void initialize() {
+        subject.getItems().addAll(getSubjectList(session.getUserId()));
+        day.getItems().addAll("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
-        try (Connection conn = databaseConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        List<String> intervals = generateTimeIntervals(5, 21, 5);
+        startTime.getItems().addAll(intervals);
+        endTime.getItems().addAll(intervals);
+    }
 
-            pstmt.setInt(1, currentUserId);
-            ResultSet rs = pstmt.executeQuery();
+    //
 
-            while (rs.next()) {
-                subjects.add(rs.getString("subject"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @FXML protected void addProcess() {
+        if (isInputInvalid()) return;
+
+        int subjectId = getSubjectIdByName(subject.getValue());
+        if (addSchedule(subjectId, day.getValue(), startTime.getValue(), endTime.getValue())) {
+            alerts.show(Alert.AlertType.INFORMATION, saveButton.getScene().getWindow(), "Success", "Added successfully!");
+            ((Stage) saveButton.getScene().getWindow()).close();
         }
-        return subjects;
     }
 
-    private boolean isTimeRangeValid(String startStr, String endStr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        try {
-            LocalTime start = LocalTime.parse(startStr, formatter);
-            LocalTime end = LocalTime.parse(endStr, formatter);
+    @FXML protected void editProcess() {
+        if (isInputInvalid()) return;
 
-            return start.isBefore(end);
-        } catch (Exception e) {
-            return false;
+        int subjectId = getSubjectIdByName(subject.getValue());
+        if (updateSchedule(subjectId, day.getValue(), startTime.getValue(), endTime.getValue())) {
+            alerts.show(Alert.AlertType.INFORMATION, saveButton.getScene().getWindow(), "Success", "Updated successfully!");
+            ((Stage) saveButton.getScene().getWindow()).close();
+
+        } else {
+            alerts.show(Alert.AlertType.ERROR, saveButton.getScene().getWindow(), "Error", "Failed to update database.");
         }
     }
 
     //
 
-    @FXML
-    protected void addProcess() {
-        String startValue = startTime.getValue();
-        String endValue = endTime.getValue();
-        String selectedSub = subject.getValue();
-        String selectedDay = day.getValue();
-
-        if (selectedSub == null || selectedDay == null || startValue == null || endValue == null) {
-            alerts.show(Alert.AlertType.ERROR, subject.getScene().getWindow(),
-                    "Error", "Please fill in all fields.");
-            return;
-        }
-
-        if (!isTimeRangeValid(startValue, endValue)) {
-            alerts.show(Alert.AlertType.ERROR, startTime.getScene().getWindow(),
-                    "Invalid Time Range",
-                    "End time (" + endValue + ") cannot be earlier than or equal to start time (" + startValue + ").");
-            return;
-        }
-
-        int subjectId = getSubjectIdByName(selectedSub);
-        if (subjectId != -1) {
-            if (addSchedule(subjectId, selectedDay, startValue, endValue)) {
-                alerts.show(Alert.AlertType.INFORMATION, saveButton.getScene().getWindow(),
-                        "Success", "Schedule saved successfully!");
-                ((Stage) saveButton.getScene().getWindow()).close();
-            }
-        }
-    }
-
-    private int getSubjectIdByName(String name) {
-        String sql = "SELECT id FROM subject WHERE subject = ? AND user_id = ?";
+    private boolean addSchedule(int subId, String d, String s, String e) {
+        String sql = "INSERT INTO schedule (subject_id, user_id, day, start_time, end_time) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, name);
+            pstmt.setInt(1, subId);
             pstmt.setInt(2, session.getUserId());
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
+            pstmt.setString(3, d);
+            pstmt.setString(4, s);
+            pstmt.setString(5, e);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException ex) { return false; }
     }
 
-    private boolean addSchedule(int subjectId, String selectedDay, String startTime, String endTime) {
-        String checkSql = "SELECT COUNT(*) FROM schedule WHERE user_id = ? AND day = ? AND start_time = ? AND end_time = ?";
-        String insertSql = "INSERT INTO schedule (subject_id, user_id, day, start_time, end_time) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = databaseConnectionManager.getConnection()) {
-
-            try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
-                checkStmt.setInt(1, session.getUserId());
-                checkStmt.setString(2, selectedDay);
-                checkStmt.setString(3, startTime);
-                checkStmt.setString(4, endTime);
-
-                ResultSet rs = checkStmt.executeQuery();
-                if (rs.next() && rs.getInt(1) > 0) {
-                    return false;
-                }
-            }
-
-            try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-                pstmt.setInt(1, subjectId);
-                pstmt.setInt(2, session.getUserId());
-                pstmt.setString(3, selectedDay);
-                pstmt.setString(4, startTime);
-                pstmt.setString(5, endTime);
-
-                return pstmt.executeUpdate() > 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    private boolean updateSchedule(int subId, String d, String s, String e) {
+        String sql = "UPDATE schedule SET subject_id = ?, day = ?, start_time = ?, end_time = ? WHERE schedule_id = ? AND user_id = ?";
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, subId);
+            pstmt.setString(2, d);
+            pstmt.setString(3, s);
+            pstmt.setString(4, e);
+            pstmt.setInt(5, editingScheduleId);
+            pstmt.setInt(6, session.getUserId());
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException ex) { return false; }
     }
 
     //
 
-    @FXML
-    private void cancelButton() {
+    @FXML private void cancelButton() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    private boolean isInputInvalid() {
+        if (subject.getValue() == null || day.getValue() == null || startTime.getValue() == null || endTime.getValue() == null) {
+            alerts.show(Alert.AlertType.ERROR, subject.getScene().getWindow(), "Error", "Fill all fields.");
+            return true;
+        }
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("h:mm a");
+        if (!LocalTime.parse(startTime.getValue(), f).isBefore(LocalTime.parse(endTime.getValue(), f))) {
+            alerts.show(Alert.AlertType.ERROR, startTime.getScene().getWindow(), "Error", "End time must be after start time.");
+            return true;
+        }
+        return false;
+    }
+
+    private int getSubjectIdByName(String name) {
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT id FROM subject WHERE subject = ? AND user_id = ?")) {
+            ps.setString(1, name);
+            ps.setInt(2, session.getUserId());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getInt("id");
+        } catch (SQLException ex) { ex.printStackTrace(); }
+        return -1;
+    }
+
+    private List<String> getSubjectList(int uId) {
+        List<String> list = new ArrayList<>();
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT subject FROM subject WHERE user_id = ?")) {
+            ps.setInt(1, uId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) list.add(rs.getString("subject"));
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return list;
+    }
+
+    private List<String> generateTimeIntervals(int startH, int endH, int interval) {
+        List<String> times = new ArrayList<>();
+        for (int h = startH; h <= endH; h++) {
+            for (int m = 0; m < 60; m += interval) {
+                if (h == endH && m > 0) break;
+                String p = (h < 12) ? "AM" : "PM";
+                int dh = (h > 12) ? h - 12 : (h == 0 ? 12 : h);
+                times.add(String.format("%d:%02d %s", dh, m, p));
+            }
+        }
+        return times;
+    }
 }

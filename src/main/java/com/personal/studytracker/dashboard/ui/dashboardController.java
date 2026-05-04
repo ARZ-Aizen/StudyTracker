@@ -241,14 +241,12 @@ public class dashboardController {
         }
     }
 
-    private void addScheduleToUI(String name, String day, String start, String end) {
+    private void addScheduleToUI(int id, String name, String day, String start, String end) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/schedule-card.fxml"));
             HBox card = loader.load();
-
             scheduleCard controller = loader.getController();
-            controller.setData(name, day, start, end);
-
+            controller.setData(id, name, day, start, end, this::loadSchedules);
             scheduleListContainer.getChildren().add(card);
 
         } catch (IOException e) {
@@ -259,7 +257,7 @@ public class dashboardController {
     public void loadSchedules() {
         scheduleListContainer.getChildren().clear();
 
-        String sql = "SELECT s.day, s.start_time, s.end_time, sub.subject " +
+        String sql = "SELECT s.schedule_id, s.day, s.start_time, s.end_time, sub.subject " +
                 "FROM schedule s " +
                 "JOIN subject sub ON s.subject_id = sub.id " +
                 "WHERE s.user_id = ?";
@@ -272,6 +270,7 @@ public class dashboardController {
 
             while (rs.next()) {
                 addScheduleToUI(
+                        rs.getInt("schedule_id"),
                         rs.getString("subject"),
                         rs.getString("day"),
                         rs.getString("start_time"),

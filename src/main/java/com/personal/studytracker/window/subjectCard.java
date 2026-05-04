@@ -41,6 +41,8 @@ public class subjectCard {
         cardSubjectCode.setStyle("-fx-text-fill: #666666;");
     }
 
+    //
+
     @FXML private void courseEditButton() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/course-edit-view.fxml"));
@@ -80,7 +82,6 @@ public class subjectCard {
 
                 if (affectedRows > 0 || refreshCallback != null) {
                     refreshCallback.run();
-                    alerts.show(AlertType.INFORMATION, null, "Deleted", "Subject removed successfully.");
                 }
 
             } catch (SQLException e) {
