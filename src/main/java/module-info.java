@@ -14,6 +14,7 @@ module com.personal.studytracker {
     requires com.jfoenix;
 
     opens com.personal.studytracker.utility to javafx.fxml;
+    opens com.personal.studytracker.model to javafx.base, javafx.fxml;
     opens com.personal.studytracker to javafx.fxml;
     opens com.personal.studytracker.window to javafx.fxml;
     opens com.personal.studytracker.dashboard.ui to javafx.fxml;

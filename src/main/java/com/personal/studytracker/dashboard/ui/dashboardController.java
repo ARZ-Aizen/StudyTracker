@@ -1,17 +1,22 @@
 package com.personal.studytracker.dashboard.ui;
 
 import com.personal.studytracker.config.databaseConnectionManager;
+import com.personal.studytracker.model.Task;
 import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
 import com.personal.studytracker.window.scheduleCard;
 import com.personal.studytracker.window.subjectCard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.*;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -40,6 +45,8 @@ public class dashboardController {
 
     @FXML private Label tasksTitleLabel, tasksSubLabel;
     @FXML private Button addTaskButton;
+    @FXML private TableView<Task> taskTable;
+    @FXML private TableColumn<Task, String> colName, colSubject, colDeadline, colPriority, colStatus;
 
     //
 
@@ -69,6 +76,10 @@ public class dashboardController {
         highlightButton(btnHome);
 
         //
+
+        setupEditableTable();
+
+        //
         mainStackPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             double w = newVal.doubleValue();
 
@@ -86,6 +97,107 @@ public class dashboardController {
             //
             responsive(w, scheduleTitleLabel, scheduleSubLabel, addSchduleButton);
         });
+    }
+
+    public void setupEditableTable() {
+        taskTable.setEditable(true);
+
+        // 1. Task Name: Editable by keyboard
+        colName.setCellFactory(TextFieldTableCell.forTableColumn());
+        colName.setOnEditCommit(event -> {
+            Task task = event.getRowValue();
+            task.setName(event.getNewValue());
+            updateTaskField(task.getId(), "task_name", event.getNewValue());
+        });
+
+        colDeadline.setCellFactory(column -> new TableCell<Task, String>() {
+            private final DatePicker datePicker = new DatePicker();
+
+            {
+                datePicker.setOnAction(e -> {
+                    if (datePicker.getValue() != null) {
+                        commitEdit(datePicker.getValue().toString());
+                    }
+                });
+                datePicker.setStyle("-fx-font-family: 'Inter';");
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    if (isEditing()) {
+                        setGraphic(datePicker);
+                        setText(null);
+                    } else {
+                        setGraphic(null);
+                        setText(item);
+                    }
+                }
+            }
+
+            @Override
+            public void startEdit() {
+                super.startEdit();
+                setGraphic(datePicker);
+                setText(null);
+            }
+
+            @Override
+            public void cancelEdit() {
+                super.cancelEdit();
+                setText(getItem());
+                setGraphic(null);
+            }
+        });
+
+        colDeadline.setOnEditCommit(event -> {
+            Task task = event.getRowValue();
+            task.setDeadline(event.getNewValue());
+            updateTaskField(task.getId(), "deadline", event.getNewValue());
+        });
+
+        colPriority.setCellFactory(ComboBoxTableCell.forTableColumn("High", "Medium", "Low"));
+        colPriority.setOnEditCommit(event -> {
+            Task task = event.getRowValue();
+            task.setPriority(event.getNewValue());
+            updateTaskField(task.getId(), "priority", event.getNewValue());
+        });
+
+        colStatus.setCellFactory(ComboBoxTableCell.forTableColumn("To do", "Completed", "Late"));
+        colStatus.setOnEditCommit(event -> {
+            Task task = event.getRowValue();
+            task.setStatus(event.getNewValue());
+            updateTaskField(task.getId(), "status", event.getNewValue());
+        });
+
+        colSubject.setCellFactory(ComboBoxTableCell.forTableColumn(getSubjectNames()));
+    }
+
+    private ObservableList<String> getSubjectNames() {
+        ObservableList<String> subjects = FXCollections.observableArrayList();
+        String sql = "SELECT subject FROM subject WHERE user_id = ?";
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) subjects.add(rs.getString("subject"));
+        } catch (SQLException e) { e.printStackTrace(); }
+        return subjects;
+    }
+
+    private int getSubjectIdByName(String name) {
+        String sql = "SELECT id FROM subject WHERE subject = ? AND user_id = ?";
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setInt(2, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) return rs.getInt("id");
+        } catch (SQLException e) { e.printStackTrace(); }
+        return -1;
     }
 
     //
@@ -108,6 +220,7 @@ public class dashboardController {
             }
             case "Tasks" -> {
                 showView(taskView);
+                loadTasks();
             }
             case "Schedule" -> {
                 showView(scheduleView);
@@ -223,6 +336,98 @@ public class dashboardController {
     //
 
     @FXML
+    private void addTaskButton() {
+        String sql = "INSERT INTO tasks (user_id, task_name, status) VALUES (?, 'New Task', 'To Do')";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, session.getUserId());
+            pstmt.executeUpdate();
+
+            loadTasks();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateTaskField(int taskId, String column, String newValue) {
+        String sql = "UPDATE tasks SET " + column + " = ? WHERE task_id = ?";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newValue);
+            pstmt.setInt(2, taskId);
+            pstmt.executeUpdate();
+            System.out.println("Task updated successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleDeleteTask() {
+        Task selected = taskTable.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        String sql = "DELETE FROM tasks WHERE task_id = ?";
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, selected.getId());
+            pstmt.executeUpdate();
+            loadTasks();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void loadTasks() {
+        ObservableList<Task> taskList = FXCollections.observableArrayList();
+
+        String sql = "SELECT t.task_id, t.task_name, s.subject, t.deadline, t.priority, t.status " +
+                "FROM tasks t " +
+                "LEFT JOIN subject s ON t.subject_id = s.id " +
+                "WHERE t.user_id = ?";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                taskList.add(new Task(
+                        rs.getInt("task_id"),
+                        rs.getString("task_name"),
+                        rs.getString("subject"),
+                        rs.getString("deadline"),
+                        rs.getString("priority"),
+                        rs.getString("status")
+                ));
+            }
+
+            colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colSubject.setCellValueFactory(new PropertyValueFactory<>("subject"));
+            colDeadline.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+            colPriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
+            colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+            taskTable.setItems(taskList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //
+
+    @FXML
     private void scheduleAddButton() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/schedule-add-view.fxml"));
@@ -233,7 +438,7 @@ public class dashboardController {
             if (popup != null) {
                 popup.setOnHidden(e -> {
                     ownerRoot.setEffect(null);
-                    loadCourse();
+                    loadSchedules();
                 });
             }
         } catch (IOException e) {
