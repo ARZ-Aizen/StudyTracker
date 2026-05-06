@@ -6,13 +6,17 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="726.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.dashboardController">
+<!-- Linked the stylesheet to the very root of the application -->
+
+<SplitPane dividerPositions="0.20821661998132587" focusTraversable="false" prefHeight="687.0" prefWidth="1071.0" style="-fx-box-border: transparent; -fx-padding: 0;" stylesheets="@../../assets/styles/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.personal.studytracker.dashboard.ui.dashboardController">
    <items>
-      <AnchorPane maxWidth="220.0" minHeight="-Infinity" minWidth="220.0" prefHeight="726.0" prefWidth="220.0" style="-fx-background-color: #f4f5f7;">
+      <!-- Replaced hardcoded background with main-bg -->
+      <AnchorPane maxWidth="220.0" minHeight="-Infinity" minWidth="220.0" prefHeight="726.0" prefWidth="220.0" styleClass="main-bg">
          <children>
-            <VBox prefHeight="689.0" prefWidth="190.0" spacing="20.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
+            <!-- Replaced hardcoded background with theme-panel -->
+            <VBox prefHeight="689.0" prefWidth="190.0" spacing="20.0" style="-fx-background-radius: 15px;" styleClass="theme-panel" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Label alignment="CENTER" prefWidth="190.0" style="-fx-font-weight: bold;" text="StudyTracker" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefWidth="190.0" style="-fx-font-weight: bold;" styleClass="primary-text" text="StudyTracker" textAlignment="CENTER">
                      <font>
                         <Font name="Inter Semi Bold" size="24.0" />
                      </font>
@@ -23,7 +27,8 @@
 
                   <VBox spacing="5.0">
                      <children>
-                        <Label text="Menu" textFill="#666666">
+                        <!-- Replaced textFill with sub-label class -->
+                        <Label styleClass="sub-label" text="Menu">
                            <font>
                               <Font name="Inter Regular" size="12.0" />
                            </font>
@@ -31,7 +36,7 @@
                               <Insets bottom="5.0" left="15.0" />
                            </VBox.margin>
                         </Label>
-                        <Button fx:id="btnHome" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Home">
+                        <Button fx:id="btnHome" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Home">
                            <graphic>
                               <FontIcon iconLiteral="fas-home" iconSize="16" text="" />
                            </graphic>
@@ -45,7 +50,7 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnCourses" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Courses">
+                        <Button fx:id="btnCourses" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Courses">
                            <graphic>
                               <FontIcon iconLiteral="fas-book" iconSize="16" />
                            </graphic>
@@ -59,7 +64,7 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnTasks" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Tasks">
+                        <Button fx:id="btnTasks" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Tasks">
                            <graphic>
                               <FontIcon iconLiteral="fas-tasks" iconSize="16" />
                            </graphic>
@@ -73,7 +78,7 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnSchedule" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Schedule">
+                        <Button fx:id="btnSchedule" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Schedule">
                            <graphic>
                               <FontIcon iconLiteral="fas-calendar-alt" iconSize="16" />
                            </graphic>
@@ -92,7 +97,7 @@
 
                   <VBox spacing="5.0">
                      <children>
-                        <Label text="General" textFill="#666666">
+                        <Label styleClass="sub-label" text="General">
                            <font>
                               <Font name="Inter Regular" size="12.0" />
                            </font>
@@ -100,7 +105,7 @@
                               <Insets bottom="5.0" left="15.0" top="15.0" />
                            </VBox.margin>
                         </Label>
-                        <Button fx:id="btnSettings" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Settings">
+                        <Button fx:id="btnSettings" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Settings">
                            <graphic>
                               <FontIcon iconLiteral="fas-cog" iconSize="16" />
                            </graphic>
@@ -114,7 +119,7 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnAbout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="About">
+                        <Button fx:id="btnAbout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="About">
                            <graphic>
                               <FontIcon iconLiteral="fas-question-circle" iconSize="16" />
                            </graphic>
@@ -128,7 +133,7 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnLogout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Logout">
+                        <Button fx:id="btnLogout" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="primary-text" text="Logout">
                            <graphic>
                               <FontIcon iconLiteral="fas-sign-out-alt" iconSize="16" />
                            </graphic>
@@ -151,9 +156,10 @@
 
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="851.0">
          <children>
-            <StackPane fx:id="mainStackPane" prefHeight="726.0" prefWidth="845.0" style="-fx-background-color: #f4f5f7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane fx:id="mainStackPane" prefHeight="726.0" prefWidth="845.0" styleClass="main-bg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
 
+                  <!-- HOME VIEW -->
                   <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
@@ -162,12 +168,12 @@
                                  <children>
                                     <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <VBox prefHeight="118.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;">
+                                          <VBox prefHeight="118.0" style="-fx-background-radius: 8px;" styleClass="theme-panel">
                                              <children>
-                                                <Label fx:id="helloUserHeader" style="-fx-font-weight: bold;" text="Hello user!">
+                                                <Label fx:id="helloUserHeader" style="-fx-font-weight: bold;" styleClass="primary-text" text="Hello user!">
                                                    <font><Font name="Inter Semi Bold" size="30.0" /></font>
                                                 </Label>
-                                                <Label text="It's good to see you again." textFill="#666666">
+                                                <Label styleClass="sub-label" text="It's good to see you again.">
                                                    <font>
                                                       <Font name="Inter Regular" size="12.0" />
                                                    </font></Label>
@@ -185,48 +191,48 @@
                                                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                                              </rowConstraints>
                                              <children>
-                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="completionRateLabel" style="-fx-font-weight: bold;" text="Completion Rate" textFill="#a16262">
+                                                      <Label fx:id="completionRateLabel" style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Completion Rate">
                                                          <font><Font name="Inter Semi Bold" size="14.0" /></font>
                                                       </Label>
-                                                      <Label fx:id="valCompletion" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0%" VBox.vgrow="ALWAYS">
+                                                      <Label fx:id="valCompletion" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" styleClass="primary-text" text="0%" VBox.vgrow="ALWAYS">
                                                          <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="dueTasksLabel" style="-fx-font-weight: bold;" text="Due Tasks" textFill="#a16262">
+                                                      <Label fx:id="dueTasksLabel" style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Due Tasks">
                                                          <font><Font name="Inter Semi Bold" size="14.0" /></font>
                                                       </Label>
-                                                      <Label fx:id="valDue" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                      <Label fx:id="valDue" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" styleClass="primary-text" text="0" VBox.vgrow="ALWAYS">
                                                          <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="totalSubjectsLabel" style="-fx-font-weight: bold;" text="Total Subjects" textFill="#a16262">
+                                                      <Label fx:id="totalSubjectsLabel" style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Total Subjects">
                                                          <font><Font name="Inter Semi Bold" size="14.0" /></font>
                                                       </Label>
-                                                      <Label fx:id="valTotal" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                      <Label fx:id="valTotal" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" styleClass="primary-text" text="0" VBox.vgrow="ALWAYS">
                                                          <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
                                                    <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                                 </VBox>
 
-                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label fx:id="todayDateLabel" style="-fx-font-weight: bold;" text="Today's Date" textFill="#a16262">
+                                                      <Label fx:id="todayDateLabel" style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Today's Date">
                                                          <font><Font name="Inter Semi Bold" size="14.0" /></font>
                                                       </Label>
-                                                      <Label fx:id="valDate" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" text="0" VBox.vgrow="ALWAYS">
+                                                      <Label fx:id="valDate" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold;" styleClass="primary-text" text="0" VBox.vgrow="ALWAYS">
                                                          <font><Font name="Inter Semi Bold" size="24.0" /></font>
                                                       </Label>
                                                    </children>
@@ -237,9 +243,9 @@
                                        </children>
                                     </VBox>
 
-                                    <AnchorPane minWidth="300.0" prefWidth="374.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" HBox.hgrow="ALWAYS">
+                                    <AnchorPane minWidth="300.0" prefWidth="374.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label layoutX="14.0" layoutY="14.0" text="Task Graph">
+                                          <Label layoutX="14.0" layoutY="14.0" styleClass="primary-text" text="Task Graph">
                                              <font><Font name="Inter Regular" size="24.0" /></font>
                                           </Label>
                                        </children>
@@ -247,9 +253,9 @@
                                  </children>
                               </HBox>
 
-                              <AnchorPane minHeight="200.0" prefHeight="330.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                              <AnchorPane minHeight="200.0" prefHeight="330.0" style="-fx-background-radius: 8px;" styleClass="theme-panel" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="14.0" text="History">
+                                    <Label layoutX="14.0" layoutY="14.0" styleClass="primary-text" text="History">
                                        <font>
                                           <Font name="Inter Regular" size="24.0" />
                                        </font>
@@ -260,6 +266,7 @@
                      </children>
                   </AnchorPane>
 
+                  <!-- COURSES VIEW -->
                   <AnchorPane fx:id="courseView" prefHeight="720.0" prefWidth="845.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
@@ -268,26 +275,26 @@
                                  <children>
                                     <VBox>
                                        <children>
-                                          <Label fx:id="courseTitleLabel" style="-fx-font-weight: bold;" text="Courses">
+                                          <Label fx:id="courseTitleLabel" style="-fx-font-weight: bold;" styleClass="primary-text" text="Courses">
                                              <font>
                                                 <Font name="Inter Semi Bold" size="30.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="courseSubLabel" text="Edit your subjects to manage your task." textFill="#666666">
+                                          <Label fx:id="courseSubLabel" styleClass="sub-label" text="Edit your subjects to manage your task.">
                                              <font>
                                                 <Font name="Inter Regular" size="12.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <Button fx:id="courseAddButton" mnemonicParsing="false" onAction="#courseAddButton" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Course" textFill="WHITE">
+                                    <Button fx:id="courseAddButton" mnemonicParsing="false" onAction="#courseAddButton" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px; -fx-text-fill: white;" text="Add Course">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
                               </VBox>
-                              <VBox style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                              <VBox style="-fx-background-radius: 8px;" styleClass="theme-panel" VBox.vgrow="ALWAYS">
                                  <children>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
                                        <content>
@@ -301,18 +308,19 @@
                      </children>
                   </AnchorPane>
 
+                  <!-- TASKS VIEW -->
                   <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <VBox prefHeight="53.0" prefWidth="264.0">
                                  <children>
-                                    <Label fx:id="tasksTitleLabel" style="-fx-font-weight: bold;" text="Tasks">
+                                    <Label fx:id="tasksTitleLabel" style="-fx-font-weight: bold;" styleClass="primary-text" text="Tasks">
                                        <font>
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="tasksSubLabel" text="Edit the table to manage your workload." textFill="#666666">
+                                    <Label fx:id="tasksSubLabel" styleClass="sub-label" text="Edit the table to manage your workload.">
                                        <font>
                                           <Font name="Inter Regular" size="12.0" />
                                        </font>
@@ -321,21 +329,21 @@
                               </VBox>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" spacing="20.0">
                                  <children>
-                                    <Button fx:id="addTaskButton" mnemonicParsing="false" onAction="#addTaskButton" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add" textFill="WHITE">
+                                    <Button fx:id="addTaskButton" mnemonicParsing="false" onAction="#addTaskButton" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px; -fx-text-fill: white;" text="Add">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete" textFill="WHITE">
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-background-radius: 5px; -fx-cursor: hand; -fx-text-fill: white;" text="Delete">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
                               </HBox>
-                              <VBox fx:id="tableTaskContainer" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                              <VBox fx:id="tableTaskContainer" style="-fx-background-radius: 8px;" styleClass="theme-panel" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView fx:id="taskTable" editable="true" focusTraversable="false" stylesheets="@../../assets/styles/style.css" VBox.vgrow="ALWAYS">
+                                    <TableView fx:id="taskTable" editable="true" focusTraversable="false" VBox.vgrow="ALWAYS">
                                        <columns>
                                           <TableColumn fx:id="colName" text="Task Name" />
                                           <TableColumn fx:id="colSubject" text="Subject" />
@@ -355,23 +363,24 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="scheduleView" prefHeight="720.0" prefWidth="845.0" visible="false" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+                  <!-- SCHEDULE VIEW -->
+                  <AnchorPane fx:id="scheduleView" prefHeight="720.0" prefWidth="845.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <VBox spacing="5.0">
                                  <children>
-                                    <Label fx:id="scheduleTitleLabel" style="-fx-font-weight: bold;" text="Schedule">
+                                    <Label fx:id="scheduleTitleLabel" style="-fx-font-weight: bold;" styleClass="primary-text" text="Schedule">
                                        <font>
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="scheduleSubLabel" text="View your subject schedule." textFill="#666666">
+                                    <Label fx:id="scheduleSubLabel" styleClass="sub-label" text="View your subject schedule.">
                                        <font>
                                           <Font name="Inter Regular" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addSchduleButton" mnemonicParsing="false" onAction="#scheduleAddButton" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Schedule" textFill="WHITE">
+                                    <Button fx:id="addSchduleButton" mnemonicParsing="false" onAction="#scheduleAddButton" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px; -fx-text-fill: white;" text="Add Schedule">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
@@ -381,7 +390,7 @@
                                     </Button>
                                  </children>
                               </VBox>
-                              <VBox style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                              <VBox style="-fx-background-radius: 8px;" styleClass="theme-panel" VBox.vgrow="ALWAYS">
                                  <children>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
                                        <content>
@@ -395,6 +404,7 @@
                      </children>
                   </AnchorPane>
 
+                  <!-- SETTINGS VIEW -->
                   <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
@@ -402,12 +412,12 @@
 
                               <VBox>
                                  <children>
-                                    <Label fx:id="settingsTitleLabel" style="-fx-font-weight: bold;" text="Settings">
+                                    <Label fx:id="settingsTitleLabel" style="-fx-font-weight: bold;" styleClass="primary-text" text="Settings">
                                        <font>
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="settingsSubLabel" text="Customize your workspace and manage security settings." textFill="#666666">
+                                    <Label fx:id="settingsSubLabel" styleClass="sub-label" text="Customize your workspace and manage security settings.">
                                        <font>
                                           <Font name="Inter Regular" size="12.0" />
                                        </font>
@@ -419,43 +429,9 @@
                                  <content>
                                     <VBox spacing="25.0">
                                        <children>
-
-                                          <VBox spacing="15.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
+                                          <VBox spacing="20.0" style="-fx-background-radius: 8px; -fx-padding: 25;" styleClass="theme-panel">
                                              <children>
-                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Preferences">
-                                                   <font>
-                                                      <Font name="Inter Semi Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Separator style="-fx-opacity: 0.1;" />
-                                                <HBox alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <VBox spacing="4.0" HBox.hgrow="ALWAYS">
-                                                         <children>
-                                                            <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Dark Mode">
-                                                               <font>
-                                                                  <Font name="Inter Semi Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label style="-fx-text-fill: #666666;" text="Easier on the eyes in low-light environments.">
-                                                               <font>
-                                                                  <Font name="Inter Regular" size="12.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </VBox>
-                                                      <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-radius: 20; -fx-cursor: hand; -fx-background-color: #a16262; -fx-text-fill: white;" text="Off">
-                                                         <font>
-                                                            <Font name="Inter Regular" size="14.0" />
-                                                         </font>
-                                                      </ToggleButton>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox spacing="20.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
-                                             <children>
-                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Account Security">
+                                                <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="Account Security">
                                                    <font>
                                                       <Font name="Inter Semi Bold" size="14.0" />
                                                    </font>
@@ -463,38 +439,38 @@
                                                 <Separator style="-fx-opacity: 0.1;" />
 
                                                 <VBox spacing="8.0">
-                                                   <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Username">
+                                                   <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="Username">
                                                       <font>
                                                          <Font name="Inter Semi Bold" size="14.0" />
                                                       </font>
                                                    </Label>
-                                                   <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                   <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                 </VBox>
 
                                                 <HBox spacing="20.0">
                                                    <children>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
-                                                         <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Current Password">
+                                                         <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="Current Password">
                                                             <font>
                                                                <Font name="Inter Semi Bold" size="14.0" />
                                                             </font>
                                                          </Label>
-                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
-                                                         <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="New Password">
+                                                         <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="New Password">
                                                             <font>
                                                                <Font name="Inter Semi Bold" size="14.0" />
                                                             </font>
                                                          </Label>
-                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                    </children>
                                                 </HBox>
 
                                                 <Separator style="-fx-opacity: 0.1;" />
 
-                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Password Recovery">
+                                                <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="Password Recovery">
                                                    <font>
                                                       <Font name="Inter Semi Bold" size="14.0" />
                                                    </font>
@@ -502,20 +478,20 @@
                                                 <HBox spacing="20.0">
                                                    <children>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
-                                                         <Label style="-fx-text-fill: #666666;" text="Security Question">
+                                                         <Label styleClass="sub-label" text="Security Question">
                                                             <font>
                                                                <Font name="Inter Regular" size="12.0" />
                                                             </font>
                                                          </Label>
-                                                         <ComboBox maxWidth="1.7976931348623157E308" prefHeight="38.0" promptText="Choose a question..." style="-fx-background-color: #f1f5f9; -fx-background-radius: 6;" />
+                                                         <ComboBox maxWidth="1.7976931348623157E308" prefHeight="38.0" promptText="Choose a question..." style="-fx-background-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
-                                                         <Label style="-fx-text-fill: #666666;" text="Your Answer">
+                                                         <Label styleClass="sub-label" text="Your Answer">
                                                             <font>
                                                                <Font name="Inter Regular" size="12.0" />
                                                             </font>
                                                          </Label>
-                                                         <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                         <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                    </children>
                                                 </HBox>
@@ -525,7 +501,7 @@
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                    <children>
-                                                      <Button fx:id="btnApplyChanges" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-cursor: hand;" text="Apply Changes">
+                                                      <Button fx:id="btnApplyChanges" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Apply Changes">
                                                          <font>
                                                             <Font name="Inter Regular" size="14.0" />
                                                          </font>
@@ -535,7 +511,7 @@
 
                                              </children>
                                           </VBox>
-                                          <VBox spacing="15.0" style="-fx-background-color: #fff1f2; -fx-border-color: #fecaca; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;">
+                                          <VBox spacing="15.0" style="-fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;" styleClass="danger-panel">
                                              <children>
                                                 <HBox alignment="CENTER_LEFT">
                                                    <children>
@@ -553,7 +529,7 @@
                                                             </Label>
                                                          </children>
                                                       </VBox>
-                                                      <Button fx:id="btnDeleteAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e11d48; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete Account">
+                                                      <Button fx:id="btnDeleteAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e11d48; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete Account">
                                                          <font>
                                                             <Font name="Inter Regular" size="14.0" />
                                                          </font>
@@ -571,6 +547,7 @@
                      </children>
                   </AnchorPane>
 
+                  <!-- ABOUT VIEW -->
                   <AnchorPane fx:id="aboutView" prefHeight="720.0" prefWidth="845.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
@@ -578,12 +555,12 @@
 
                               <VBox>
                                  <children>
-                                    <Label fx:id="aboutTitleLabel" style="-fx-font-weight: bold;" text="About">
+                                    <Label fx:id="aboutTitleLabel" style="-fx-font-weight: bold;" styleClass="primary-text" text="About">
                                        <font>
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Learn more about StudyTracker and its developers." textFill="#666666">
+                                    <Label styleClass="sub-label" text="Learn more about StudyTracker and its developers.">
                                        <font>
                                           <Font name="Inter Regular" size="12.0" />
                                        </font>
@@ -594,20 +571,20 @@
                               <VBox spacing="25.0" VBox.vgrow="ALWAYS">
                                  <children>
 
-                                    <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 50;">
+                                    <VBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 8px; -fx-padding: 50;" styleClass="theme-panel">
                                        <children>
                                           <FontIcon iconColor="#a16262" iconLiteral="fas-graduation-cap" iconSize="48" />
-                                          <Label style="-fx-font-weight: bold;" text="StudyTracker">
+                                          <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="StudyTracker">
                                              <font>
                                                 <Font name="Inter Semi Bold" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Version 1.0.0" textFill="#666666">
+                                          <Label styleClass="sub-label" text="Version 1.0.0">
                                              <font>
                                                 <Font name="Inter Regular" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" maxWidth="500.0" text="A comprehensive student tool designed to help you track tasks, manage courses, and organize your academic schedule efficiently." textAlignment="CENTER" textFill="#666666" wrapText="true">
+                                          <Label alignment="CENTER" maxWidth="500.0" styleClass="sub-label" text="A comprehensive student tool designed to help you track tasks, manage courses, and organize your academic schedule efficiently." textAlignment="CENTER" wrapText="true">
                                              <font>
                                                 <Font name="Inter Regular" size="14.0" />
                                              </font>
@@ -618,9 +595,9 @@
                                        </children>
                                     </VBox>
 
-                                    <VBox spacing="15.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
+                                    <VBox spacing="15.0" style="-fx-background-radius: 8px; -fx-padding: 25;" styleClass="theme-panel">
                                        <children>
-                                          <Label style="-fx-font-weight: bold;" text="Development Team">
+                                          <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="Development Team">
                                              <font>
                                                 <Font name="Inter Semi Bold" size="16.0" />
                                              </font>
@@ -635,7 +612,7 @@
                                                             <Font name="Inter Semi Bold" size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Lead Developer" textFill="#666666">
+                                                      <Label styleClass="sub-label" text="Lead Developer">
                                                          <font>
                                                             <Font name="Inter Regular" size="12.0" />
                                                          </font>
@@ -649,7 +626,7 @@
                                                             <Font name="Inter Semi Bold" size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Co-Developer / UI Designer" textFill="#666666">
+                                                      <Label styleClass="sub-label" text="Co-Developer / UI Designer">
                                                          <font>
                                                             <Font name="Inter Regular" size="12.0" />
                                                          </font>
@@ -662,7 +639,7 @@
                                              </VBox.margin>
                                           </HBox>
                                           <Separator style="-fx-opacity: 0.3;" />
-                                          <Label text="© 2026 StudyTracker. All rights reserved." textFill="#a0a0a0">
+                                          <Label styleClass="sub-label" text="© 2026 StudyTracker. All rights reserved.">
                                              <font>
                                                 <Font name="Inter Regular" size="11.0" />
                                              </font>

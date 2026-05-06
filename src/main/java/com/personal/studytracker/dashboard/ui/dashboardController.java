@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -65,10 +67,14 @@ public class dashboardController {
 
     //
 
+
+    //
+
     private List<AnchorPane> allViews;
     private List<Button> allButtons;
 
     //
+
 
     @FXML
     public void initialize() {
@@ -111,7 +117,7 @@ public class dashboardController {
 
             //
             responsive(w, aboutTitleLabel, aboutSubLabel, null);
-            
+
         });
 
     }
@@ -128,12 +134,9 @@ public class dashboardController {
 
         colDeadline.setCellFactory(column -> new TableCell<Task, String>() {
             private final DatePicker datePicker = new DatePicker();
-
             {
                 datePicker.setOnAction(e -> {
-                    if (datePicker.getValue() != null) {
-                        commitEdit(datePicker.getValue().toString());
-                    }
+                    if (datePicker.getValue() != null) commitEdit(datePicker.getValue().toString());
                 });
                 datePicker.setStyle("-fx-font-family: 'Inter';");
             }
@@ -143,46 +146,86 @@ public class dashboardController {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
+                    setText(null);
                 } else {
-                    if (isEditing()) {
-                        setGraphic(datePicker);
-                        setText(null);
-                    } else {
-                        setGraphic(null);
-                        setText(item);
-                    }
+                    if (isEditing()) { setGraphic(datePicker); setText(null); }
+                    else { setGraphic(null); setText(item); }
                 }
             }
-
-            @Override
-            public void startEdit() {
-                super.startEdit();
-                setGraphic(datePicker);
-                setText(null);
-            }
-
-            @Override
-            public void cancelEdit() {
-                super.cancelEdit();
-                setText(getItem());
-                setGraphic(null);
-            }
+            @Override public void startEdit() { super.startEdit(); setGraphic(datePicker); setText(null); }
+            @Override public void cancelEdit() { super.cancelEdit(); setText(getItem()); setGraphic(null); }
         });
-
         colDeadline.setOnEditCommit(event -> {
             Task task = event.getRowValue();
             task.setDeadline(event.getNewValue());
             updateTaskField(task.getId(), "deadline", event.getNewValue());
         });
 
-        colPriority.setCellFactory(ComboBoxTableCell.forTableColumn("High", "Medium", "Low"));
+        colPriority.setCellFactory(column -> new ComboBoxTableCell<>(FXCollections.observableArrayList("High", "Medium", "Low")) {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setAlignment(javafx.geometry.Pos.CENTER);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (isEditing()) {
+                        setText(null);
+                    } else {
+                        Label badge = new Label(item);
+                        badge.setPadding(new Insets(4, 10, 4, 10));
+                        String baseStyle = "-fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 11px; -fx-font-family: 'Inter';";
+
+                        switch (item.toLowerCase()) {
+                            case "high" -> badge.setStyle(baseStyle + "-fx-background-color: #fee2e2; -fx-text-fill: #991b1b;");
+                            case "medium" -> badge.setStyle(baseStyle + "-fx-background-color: #fef9c3; -fx-text-fill: #854d0e;");
+                            case "low" -> badge.setStyle(baseStyle + "-fx-background-color: #dcfce7; -fx-text-fill: #166534;");
+                            default -> badge.setStyle(baseStyle + "-fx-background-color: #e2e8f0; -fx-text-fill: #475569;");
+                        }
+                        setGraphic(badge);
+                        setText(null);
+                    }
+                }
+            }
+        });
+
         colPriority.setOnEditCommit(event -> {
             Task task = event.getRowValue();
             task.setPriority(event.getNewValue());
             updateTaskField(task.getId(), "priority", event.getNewValue());
         });
 
-        colStatus.setCellFactory(ComboBoxTableCell.forTableColumn("To do", "Completed", "Late"));
+        colStatus.setCellFactory(column -> new ComboBoxTableCell<>(FXCollections.observableArrayList("To do", "Completed", "Late")) {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setAlignment(javafx.geometry.Pos.CENTER);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (isEditing()) {
+                        setText(null);
+                    } else {
+                        Label badge = new Label(item);
+                        badge.setPadding(new Insets(4, 10, 4, 10));
+                        String baseStyle = "-fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 11px; -fx-font-family: 'Inter';";
+
+                        if (item.equalsIgnoreCase("Completed") || item.equalsIgnoreCase("Done")) {
+                            badge.setStyle(baseStyle + "-fx-background-color: #dcfce7; -fx-text-fill: #166534;");
+                        } else if (item.equalsIgnoreCase("Late")) {
+                            badge.setStyle(baseStyle + "-fx-background-color: #fee2e2; -fx-text-fill: #991b1b;");
+                        } else {
+                            badge.setStyle(baseStyle + "-fx-background-color: #f1f5f9; -fx-text-fill: #475569;");
+                        }
+                        setGraphic(badge);
+                        setText(null);
+                    }
+                }
+            }
+        });
+
         colStatus.setOnEditCommit(event -> {
             Task task = event.getRowValue();
             task.setStatus(event.getNewValue());
@@ -190,7 +233,22 @@ public class dashboardController {
         });
 
         colSubject.setCellFactory(ComboBoxTableCell.forTableColumn(getSubjectNames()));
+
+        colSubject.setOnEditCommit(event -> {
+            Task task = event.getRowValue();
+            String newSubject = event.getNewValue();
+            task.setSubject(newSubject);
+
+            int subjectId = getSubjectIdByName(newSubject);
+            updateTaskField(task.getId(), "subject_id", String.valueOf(subjectId));
+        });
+
+        colName.setStyle("-fx-alignment: CENTER;");
+        colSubject.setStyle("-fx-alignment: CENTER;");
+        colDeadline.setStyle("-fx-alignment: CENTER;");
     }
+
+    //
 
     private ObservableList<String> getSubjectNames() {
         ObservableList<String> subjects = FXCollections.observableArrayList();
@@ -263,12 +321,21 @@ public class dashboardController {
     }
 
     public void responsive(double width, Label title, Label subtitle, Button actionBtn) {
+        // 1. Calculate sizes first
         double tSize = Math.clamp(width / 40, 24, 48);
         double sSize = Math.clamp(width / 85, 12, 16);
 
-        title.setStyle("-fx-font-size: " + tSize + "px; -fx-font-weight: 800;");
-        subtitle.setStyle("-fx-font-size: " + sSize + "px; -fx-text-fill: #666666;");
+        // 2. Safely apply title style
+        if (title != null) {
+            title.setStyle("-fx-font-size: " + tSize + "px; -fx-font-weight: 800;");
+        }
 
+        // 3. Safely apply subtitle style (This is where the NPE was happening)
+        if (subtitle != null) {
+            subtitle.setStyle("-fx-font-size: " + sSize + "px; -fx-text-fill: #666666;");
+        }
+
+        // 4. Safely apply button style
         if (actionBtn != null) {
             double bSize = Math.clamp(width / 90, 12, 16);
             actionBtn.setStyle("-fx-font-size: " + bSize + "px; " +
@@ -441,6 +508,8 @@ public class dashboardController {
             e.printStackTrace();
         }
     }
+
+
 
     //
 
