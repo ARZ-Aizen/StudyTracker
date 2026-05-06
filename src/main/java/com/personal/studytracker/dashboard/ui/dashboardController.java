@@ -321,21 +321,17 @@ public class dashboardController {
     }
 
     public void responsive(double width, Label title, Label subtitle, Button actionBtn) {
-        // 1. Calculate sizes first
         double tSize = Math.clamp(width / 40, 24, 48);
         double sSize = Math.clamp(width / 85, 12, 16);
 
-        // 2. Safely apply title style
         if (title != null) {
             title.setStyle("-fx-font-size: " + tSize + "px; -fx-font-weight: 800;");
         }
 
-        // 3. Safely apply subtitle style (This is where the NPE was happening)
         if (subtitle != null) {
             subtitle.setStyle("-fx-font-size: " + sSize + "px; -fx-text-fill: #666666;");
         }
 
-        // 4. Safely apply button style
         if (actionBtn != null) {
             double bSize = Math.clamp(width / 90, 12, 16);
             actionBtn.setStyle("-fx-font-size: " + bSize + "px; " +
@@ -445,7 +441,6 @@ public class dashboardController {
             pstmt.setString(1, newValue);
             pstmt.setInt(2, taskId);
             pstmt.executeUpdate();
-            System.out.println("Task updated successfully.");
 
         } catch (SQLException e) {
             e.printStackTrace();
