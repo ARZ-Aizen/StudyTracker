@@ -56,6 +56,15 @@ public class dashboardController {
 
     //
 
+    @FXML private Label settingsTitleLabel, settingsSubLabel;
+
+    //
+
+
+    @FXML private Label aboutTitleLabel, aboutSubLabel;
+
+    //
+
     private List<AnchorPane> allViews;
     private List<Button> allButtons;
 
@@ -64,8 +73,8 @@ public class dashboardController {
     @FXML
     public void initialize() {
         //
-        allViews = List.of(homeView, courseView, taskView, scheduleView, historyView, settingsView, aboutView);
-        allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnHistory, btnSettings, btnAbout);
+        allViews = List.of(homeView, courseView, taskView, scheduleView, settingsView, aboutView);
+        allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnSettings, btnAbout);
 
         //
         helloUserHeader.setText("Hello, " + session.getUsername() + "!");
@@ -96,13 +105,20 @@ public class dashboardController {
 
             //
             responsive(w, scheduleTitleLabel, scheduleSubLabel, addSchduleButton);
+
+            //
+            responsive(w, settingsTitleLabel, settingsSubLabel, null);
+
+            //
+            responsive(w, aboutTitleLabel, aboutSubLabel, null);
+            
         });
+
     }
 
     public void setupEditableTable() {
         taskTable.setEditable(true);
 
-        // 1. Task Name: Editable by keyboard
         colName.setCellFactory(TextFieldTableCell.forTableColumn());
         colName.setOnEditCommit(event -> {
             Task task = event.getRowValue();
@@ -226,7 +242,6 @@ public class dashboardController {
                 showView(scheduleView);
                 loadSchedules();
             }
-            case "History" -> showView(historyView);
             case "Settings" -> showView(settingsView);
             case "About" -> showView(aboutView);
             case "Logout" -> handleLogout();
@@ -250,16 +265,18 @@ public class dashboardController {
     public void responsive(double width, Label title, Label subtitle, Button actionBtn) {
         double tSize = Math.clamp(width / 40, 24, 48);
         double sSize = Math.clamp(width / 85, 12, 16);
-        double bSize = Math.clamp(width / 90, 12, 16);
 
         title.setStyle("-fx-font-size: " + tSize + "px; -fx-font-weight: 800;");
         subtitle.setStyle("-fx-font-size: " + sSize + "px; -fx-text-fill: #666666;");
 
-        actionBtn.setStyle("-fx-font-size: " + bSize + "px; " +
-                "-fx-background-color: #a16262; " +
-                "-fx-text-fill: white; " +
-                "-fx-background-radius: 5px; " +
-                "-fx-cursor: hand;");
+        if (actionBtn != null) {
+            double bSize = Math.clamp(width / 90, 12, 16);
+            actionBtn.setStyle("-fx-font-size: " + bSize + "px; " +
+                    "-fx-background-color: #a16262; " +
+                    "-fx-text-fill: white; " +
+                    "-fx-background-radius: 5px; " +
+                    "-fx-cursor: hand;");
+        }
     }
 
     private void showView(AnchorPane view) {

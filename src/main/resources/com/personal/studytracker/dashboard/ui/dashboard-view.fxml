@@ -10,7 +10,7 @@
    <items>
       <AnchorPane maxWidth="220.0" minHeight="-Infinity" minWidth="220.0" prefHeight="726.0" prefWidth="220.0" style="-fx-background-color: #f4f5f7;">
          <children>
-            <VBox prefHeight="689.0" prefWidth="190.0" spacing="20.0" style="-fx-background-color: EDEDED; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
+            <VBox prefHeight="689.0" prefWidth="190.0" spacing="20.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 15px;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
                <children>
                   <Label alignment="CENTER" prefWidth="190.0" style="-fx-font-weight: bold;" text="StudyTracker" textAlignment="CENTER">
                      <font>
@@ -23,7 +23,7 @@
 
                   <VBox spacing="5.0">
                      <children>
-                        <Label text="MENU" textFill="#666666">
+                        <Label text="Menu" textFill="#666666">
                            <font>
                               <Font name="Inter Regular" size="12.0" />
                            </font>
@@ -87,26 +87,12 @@
                               <Insets left="8.0" right="8.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnHistory" alignment="CENTER_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" text="History">
-                           <graphic>
-                              <FontIcon iconLiteral="fas-history" iconSize="16" />
-                           </graphic>
-                           <font>
-                              <Font name="Inter Regular" size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="8.0" left="15.0" top="8.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets left="8.0" right="8.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                   </VBox>
 
                   <VBox spacing="5.0">
                      <children>
-                        <Label text="GENERAL" textFill="#666666">
+                        <Label text="General" textFill="#666666">
                            <font>
                               <Font name="Inter Regular" size="12.0" />
                            </font>
@@ -162,13 +148,15 @@
             </VBox>
          </children>
       </AnchorPane>
+
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="851.0">
          <children>
             <StackPane fx:id="mainStackPane" prefHeight="726.0" prefWidth="845.0" style="-fx-background-color: #f4f5f7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+
                   <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
-                        <VBox spacing="20.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <HBox spacing="20.0" VBox.vgrow="ALWAYS">
                                  <children>
@@ -184,7 +172,7 @@
                                                       <Font name="Inter Regular" size="12.0" />
                                                    </font></Label>
                                              </children>
-                                             <padding><Insets left="15.0" top="15.0" /></padding>
+                                             <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
                                           </VBox>
 
                                           <GridPane hgap="15.0" vgap="15.0" VBox.vgrow="ALWAYS">
@@ -274,7 +262,7 @@
 
                   <AnchorPane fx:id="courseView" prefHeight="720.0" prefWidth="845.0" visible="false">
                      <children>
-                        <VBox spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <VBox spacing="15.0">
                                  <children>
@@ -285,7 +273,11 @@
                                                 <Font name="Inter Semi Bold" size="30.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="courseSubLabel" text="Edit your subjects to manage your task." textFill="#666666" />
+                                          <Label fx:id="courseSubLabel" text="Edit your subjects to manage your task." textFill="#666666">
+                                             <font>
+                                                <Font name="Inter Regular" size="12.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </VBox>
                                     <Button fx:id="courseAddButton" mnemonicParsing="false" onAction="#courseAddButton" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Course" textFill="WHITE">
@@ -309,9 +301,9 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="true">
+                  <AnchorPane fx:id="taskView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
-                        <VBox spacing="30.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="40.0">
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <VBox prefHeight="53.0" prefWidth="264.0">
                                  <children>
@@ -320,24 +312,28 @@
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="tasksSubLabel" text="Edit the table to manage your workload." textFill="#666666" />
+                                    <Label fx:id="tasksSubLabel" text="Edit the table to manage your workload." textFill="#666666">
+                                       <font>
+                                          <Font name="Inter Regular" size="12.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </VBox>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="187.0" spacing="20.0">
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" spacing="20.0">
                                  <children>
-                                    <Button fx:id="addTaskButton" mnemonicParsing="false" onAction="#addTaskButton" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Add" textFill="WHITE">
+                                    <Button fx:id="addTaskButton" mnemonicParsing="false" onAction="#addTaskButton" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add" textFill="WHITE">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-cursor: hand;" text="Delete" textFill="WHITE">
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteTask" prefHeight="35.0" prefWidth="83.0" style="-fx-background-color: #a16262; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete" textFill="WHITE">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
                               </HBox>
-                              <VBox fx:id="tableContainer" style="-fx-background-color: EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
+                              <VBox fx:id="tableTaskContainer" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <TableView fx:id="taskTable" editable="true" focusTraversable="false" stylesheets="@../../assets/styles/style.css" VBox.vgrow="ALWAYS">
                                        <columns>
@@ -361,7 +357,7 @@
 
                   <AnchorPane fx:id="scheduleView" prefHeight="720.0" prefWidth="845.0" visible="false" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                      <children>
-                        <VBox spacing="25.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
                               <VBox spacing="5.0">
                                  <children>
@@ -370,7 +366,11 @@
                                           <Font name="Inter Semi Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="scheduleSubLabel" text="View your subject schedule." textFill="#666666" />
+                                    <Label fx:id="scheduleSubLabel" text="View your subject schedule." textFill="#666666">
+                                       <font>
+                                          <Font name="Inter Regular" size="12.0" />
+                                       </font>
+                                    </Label>
                                     <Button fx:id="addSchduleButton" mnemonicParsing="false" onAction="#scheduleAddButton" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #a16262; -fx-cursor: hand; -fx-background-radius: 5px;" text="Add Schedule" textFill="WHITE">
                                        <font>
                                           <Font name="Inter Regular" size="14.0" />
@@ -395,11 +395,292 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="historyView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="settingsView" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                  <AnchorPane fx:id="aboutView" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0">
+                     <children>
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                           <children>
+
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="settingsTitleLabel" style="-fx-font-weight: bold;" text="Settings">
+                                       <font>
+                                          <Font name="Inter Semi Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="settingsSubLabel" text="Customize your workspace and manage security settings." textFill="#666666">
+                                       <font>
+                                          <Font name="Inter Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+
+                              <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                                 <content>
+                                    <VBox spacing="25.0">
+                                       <children>
+
+                                          <VBox spacing="15.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Preferences">
+                                                   <font>
+                                                      <Font name="Inter Semi Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator style="-fx-opacity: 0.1;" />
+                                                <HBox alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Dark Mode">
+                                                               <font>
+                                                                  <Font name="Inter Semi Bold" size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label style="-fx-text-fill: #666666;" text="Easier on the eyes in low-light environments.">
+                                                               <font>
+                                                                  <Font name="Inter Regular" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
+                                                      <ToggleButton mnemonicParsing="false" prefHeight="38.0" prefWidth="90.0" style="-fx-background-radius: 20; -fx-cursor: hand; -fx-background-color: #a16262; -fx-text-fill: white;" text="Off">
+                                                         <font>
+                                                            <Font name="Inter Regular" size="14.0" />
+                                                         </font>
+                                                      </ToggleButton>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="20.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
+                                             <children>
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Account Security">
+                                                   <font>
+                                                      <Font name="Inter Semi Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator style="-fx-opacity: 0.1;" />
+
+                                                <VBox spacing="8.0">
+                                                   <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Username">
+                                                      <font>
+                                                         <Font name="Inter Semi Bold" size="14.0" />
+                                                      </font>
+                                                   </Label>
+                                                   <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                </VBox>
+
+                                                <HBox spacing="20.0">
+                                                   <children>
+                                                      <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                                         <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Current Password">
+                                                            <font>
+                                                               <Font name="Inter Semi Bold" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                      </VBox>
+                                                      <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                                         <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="New Password">
+                                                            <font>
+                                                               <Font name="Inter Semi Bold" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+
+                                                <Separator style="-fx-opacity: 0.1;" />
+
+                                                <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Password Recovery">
+                                                   <font>
+                                                      <Font name="Inter Semi Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox spacing="20.0">
+                                                   <children>
+                                                      <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                                         <Label style="-fx-text-fill: #666666;" text="Security Question">
+                                                            <font>
+                                                               <Font name="Inter Regular" size="12.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <ComboBox maxWidth="1.7976931348623157E308" prefHeight="38.0" promptText="Choose a question..." style="-fx-background-color: #f1f5f9; -fx-background-radius: 6;" />
+                                                      </VBox>
+                                                      <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                                                         <Label style="-fx-text-fill: #666666;" text="Your Answer">
+                                                            <font>
+                                                               <Font name="Inter Regular" size="12.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-border-color: #e2e8f0; -fx-border-radius: 6;" />
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_RIGHT">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="btnApplyChanges" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-cursor: hand;" text="Apply Changes">
+                                                         <font>
+                                                            <Font name="Inter Regular" size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="15.0" style="-fx-background-color: #fff1f2; -fx-border-color: #fecaca; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <Label style="-fx-font-weight: bold; -fx-text-fill: #991b1b;" text="Delete Account">
+                                                               <font>
+                                                                  <Font name="Inter Semi Bold" size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label style="-fx-text-fill: #be123c;" text="Once you delete your account, there is no going back. Please be certain." wrapText="true">
+                                                               <font>
+                                                                  <Font name="Inter Regular" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
+                                                      <Button fx:id="btnDeleteAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e11d48; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete Account">
+                                                         <font>
+                                                            <Font name="Inter Regular" size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="aboutView" prefHeight="720.0" prefWidth="845.0" visible="false">
+                     <children>
+                        <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                           <children>
+
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="aboutTitleLabel" style="-fx-font-weight: bold;" text="About">
+                                       <font>
+                                          <Font name="Inter Semi Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Learn more about StudyTracker and its developers." textFill="#666666">
+                                       <font>
+                                          <Font name="Inter Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+
+                              <VBox spacing="25.0" VBox.vgrow="ALWAYS">
+                                 <children>
+
+                                    <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 50;">
+                                       <children>
+                                          <FontIcon iconColor="#a16262" iconLiteral="fas-graduation-cap" iconSize="48" />
+                                          <Label style="-fx-font-weight: bold;" text="StudyTracker">
+                                             <font>
+                                                <Font name="Inter Semi Bold" size="28.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Version 1.0.0" textFill="#666666">
+                                             <font>
+                                                <Font name="Inter Regular" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" maxWidth="500.0" text="A comprehensive student tool designed to help you track tasks, manage courses, and organize your academic schedule efficiently." textAlignment="CENTER" textFill="#666666" wrapText="true">
+                                             <font>
+                                                <Font name="Inter Regular" size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+
+                                    <VBox spacing="15.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 8px; -fx-padding: 25;">
+                                       <children>
+                                          <Label style="-fx-font-weight: bold;" text="Development Team">
+                                             <font>
+                                                <Font name="Inter Semi Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator style="-fx-opacity: 0.3;" />
+                                          <HBox spacing="80.0">
+                                             <children>
+                                                <VBox spacing="5.0">
+                                                   <children>
+                                                      <Label style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Allan Oiga">
+                                                         <font>
+                                                            <Font name="Inter Semi Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Lead Developer" textFill="#666666">
+                                                         <font>
+                                                            <Font name="Inter Regular" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox spacing="5.0">
+                                                   <children>
+                                                      <Label style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Allyssa Rabago">
+                                                         <font>
+                                                            <Font name="Inter Semi Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Co-Developer / UI Designer" textFill="#666666">
+                                                         <font>
+                                                            <Font name="Inter Regular" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <Separator style="-fx-opacity: 0.3;" />
+                                          <Label text="© 2026 StudyTracker. All rights reserved." textFill="#a0a0a0">
+                                             <font>
+                                                <Font name="Inter Regular" size="11.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+
+                                 </children>
+                              </VBox>
+
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+
                </children>
             </StackPane>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </items>
 </SplitPane>
