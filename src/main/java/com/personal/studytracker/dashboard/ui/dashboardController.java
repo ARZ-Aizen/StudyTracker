@@ -13,7 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,7 +39,10 @@ public class dashboardController {
     //
 
     @FXML private Label helloUserHeader, completionRateLabel, dueTasksLabel, totalSubjectsLabel, todayDateLabel, valCompletion, valDue, valTotal, valDate;
-
+    @FXML private TableView<Task> dashboardTodoTable;
+    @FXML private TableColumn<Task, String> dashColTaskName;
+    @FXML private TableColumn<Task, String> dashColSubject;
+    @FXML private BarChart<String, Number> taskGraph;
     //
 
     @FXML private Label courseTitleLabel, courseSubLabel;
@@ -64,11 +68,7 @@ public class dashboardController {
 
     //
 
-
     @FXML private Label aboutTitleLabel, aboutSubLabel;
-
-    //
-
 
     //
 
@@ -92,6 +92,8 @@ public class dashboardController {
         homeView.setVisible(true);
         highlightButton(btnHome);
         loadDashboard();
+        loadDashboardGraph();
+        loadDashboardTodoTable();
 
         //
 
@@ -293,6 +295,8 @@ public class dashboardController {
             case "Home" -> {
                 showView(homeView);
                 loadDashboard();
+                loadDashboardGraph();
+                loadDashboardTodoTable();
             }
             case "Courses" -> {
                 showView(courseView);
@@ -364,7 +368,6 @@ public class dashboardController {
     @FXML
     private void handleLogout() {
         session.clear();
-
         Stage stage = (Stage) btnHome.getScene().getWindow();
         stage.setMaximized(false);
         Parent root = btnHome.getScene().getRoot();
@@ -434,6 +437,68 @@ public class dashboardController {
         }
 
 
+    }
+
+    public void loadDashboardTodoTable() {
+        ObservableList<Task> pendingTasks = FXCollections.observableArrayList();
+        String sql = "SELECT t.task_id, t.task_name, s.subject, t.deadline, t.priority, t.status " +
+                "FROM tasks t " +
+                "LEFT JOIN subject s ON t.subject_id = s.id " +
+                "WHERE t.user_id = ? AND (t.status = 'To do' OR t.status = 'To Do') " +
+                "ORDER BY t.deadline ASC LIMIT 10";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                pendingTasks.add(new Task(
+                        rs.getInt("task_id"),
+                        rs.getString("task_name"),
+                        rs.getString("subject"),
+                        rs.getString("deadline"),
+                        rs.getString("priority"),
+                        rs.getString("status")
+                ));
+            }
+
+            dashColTaskName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            dashColSubject.setCellValueFactory(new PropertyValueFactory<>("subject"));
+
+            dashboardTodoTable.setItems(pendingTasks);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadDashboardGraph() {
+        taskGraph.getData().clear();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Pending Tasks by Subject");
+        String sql = "SELECT s.subject, COUNT(t.task_id) as task_count " +
+                "FROM tasks t " +
+                "JOIN subject s ON t.subject_id = s.id " +
+                "WHERE t.user_id = ? AND t.status != 'Completed' AND t.status != 'Done' " +
+                "GROUP BY s.subject";
+
+        try (Connection conn = databaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, session.getUserId());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String subjectName = rs.getString("subject");
+                int taskCount = rs.getInt("task_count");
+                series.getData().add(new XYChart.Data<>(subjectName, taskCount));
+            }
+            taskGraph.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //
