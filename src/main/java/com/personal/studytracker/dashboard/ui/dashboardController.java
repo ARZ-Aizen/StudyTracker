@@ -364,8 +364,12 @@ public class dashboardController {
     @FXML
     private void handleLogout() {
         session.clear();
+
+        Stage stage = (Stage) btnHome.getScene().getWindow();
+        stage.setMaximized(false);
         Parent root = btnHome.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
+        stage.centerOnScreen();
     }
 
     //
