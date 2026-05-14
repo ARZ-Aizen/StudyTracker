@@ -2,6 +2,7 @@ package com.personal.studytracker.dashboard.ui;
 
 import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.model.Task;
+import com.personal.studytracker.utility.alerts;
 import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
 import com.personal.studytracker.window.scheduleCard;
@@ -9,6 +10,7 @@ import com.personal.studytracker.window.subjectCard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.stage.Window;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -601,16 +603,32 @@ public class dashboardController {
         Task selected = taskTable.getSelectionModel().getSelectedItem();
         if (selected == null) return;
 
-        String sql = "DELETE FROM tasks WHERE task_id = ?";
-        try (Connection conn = databaseConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        Window ownerWindow = taskTable.getScene().getWindow();
 
-            pstmt.setInt(1, selected.getId());
-            pstmt.executeUpdate();
-            loadTasks();
+        boolean confirmed = alerts.showConfirmation(
+                ownerWindow,
+                "Confirm Deletion",
+                "Are you sure you want to delete task: '" + selected.getName() + "'? This action cannot be undone."
+        );
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (confirmed) {
+            String sql = "DELETE FROM tasks WHERE task_id = ?";
+
+            try (Connection conn = databaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setInt(1, selected.getId());
+                pstmt.executeUpdate();
+
+                loadTasks();
+                loadDashboard();
+                loadDashboardTodoTable();
+                loadDashboardTodoTable();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                alerts.show(Alert.AlertType.ERROR, ownerWindow, "Database Error", "Failed to delete the task.");
+            }
         }
     }
 
@@ -652,8 +670,6 @@ public class dashboardController {
             e.printStackTrace();
         }
     }
-
-
 
     //
 
