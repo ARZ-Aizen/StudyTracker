@@ -106,7 +106,10 @@ public class dashboardController {
             //
             responsive(w, helloUserHeader,
                     List.of(completionRateLabel, dueTasksLabel, totalSubjectsLabel, todayDateLabel),
-                    List.of(valCompletion, valDue, valTotal, valDate));
+                    List.of(valCompletion, valDue, valTotal));
+
+            double dateSize = Math.clamp(w / 60, 14, 22);
+            valDate.setStyle("-fx-font-size: " + dateSize + "px; -fx-font-weight: 800;");
 
             //
             responsive(w, courseTitleLabel, courseSubLabel, courseAddButton);
@@ -305,6 +308,8 @@ public class dashboardController {
             case "Tasks" -> {
                 showView(taskView);
                 loadTasks();
+                setupEditableTable();
+
             }
             case "Schedule" -> {
                 showView(scheduleView);
@@ -474,32 +479,37 @@ public class dashboardController {
         }
     }
 
-    public void loadDashboardGraph() {
-        taskGraph.getData().clear();
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Pending Tasks by Subject");
-        String sql = "SELECT s.subject, COUNT(t.task_id) as task_count " +
-                "FROM tasks t " +
-                "JOIN subject s ON t.subject_id = s.id " +
-                "WHERE t.user_id = ? AND t.status != 'Completed' AND t.status != 'Done' " +
-                "GROUP BY s.subject";
+        public void loadDashboardGraph() {
+            taskGraph.getData().clear();
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Pending Tasks by Subject");
+            String sql = "SELECT s.subject, COUNT(t.task_id) as task_count " +
+                    "FROM tasks t " +
+                    "JOIN subject s ON t.subject_id = s.id " +
+                    "WHERE t.user_id = ? AND t.status != 'Completed' AND t.status != 'Done' " +
+                    "GROUP BY s.subject";
 
-        try (Connection conn = databaseConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            try (Connection conn = databaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, session.getUserId());
-            ResultSet rs = pstmt.executeQuery();
+                pstmt.setInt(1, session.getUserId());
+                ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
-                String subjectName = rs.getString("subject");
-                int taskCount = rs.getInt("task_count");
-                series.getData().add(new XYChart.Data<>(subjectName, taskCount));
+                while (rs.next()) {
+                    String subjectName = rs.getString("subject");
+                    int taskCount = rs.getInt("task_count");
+
+                    if (subjectName.length() > 12) {
+                        subjectName = subjectName.substring(0, 12) + "...";
+                    }
+
+                     series.getData().add(new XYChart.Data<>(subjectName, taskCount));
+                }
+                taskGraph.getData().add(series);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            taskGraph.getData().add(series);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
 
     //
 
