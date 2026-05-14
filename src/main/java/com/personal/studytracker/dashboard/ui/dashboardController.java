@@ -23,6 +23,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class dashboardController {
@@ -89,6 +91,7 @@ public class dashboardController {
         allViews.forEach(view -> view.setVisible(false));
         homeView.setVisible(true);
         highlightButton(btnHome);
+        loadDashboard();
 
         //
 
@@ -287,7 +290,10 @@ public class dashboardController {
         highlightButton(clickedButton);
 
         switch (menuText) {
-            case "Home" -> showView(homeView);
+            case "Home" -> {
+                showView(homeView);
+                loadDashboard();
+            }
             case "Courses" -> {
                 showView(courseView);
                 loadCourse();
@@ -360,6 +366,70 @@ public class dashboardController {
         session.clear();
         Parent root = btnHome.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
+    }
+
+    //
+
+    public void loadDashboard () {
+        LocalDate dateToday = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        valDate.setText(dateToday.format((formatter)));
+
+        try (Connection conn = databaseConnectionManager.getConnection()) {
+            int userId = session.getUserId();
+
+            String subjectQuery = "SELECT COUNT(*) FROM subject WHERE user_id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(subjectQuery)) {
+                pstmt.setInt(1, userId);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next())  {
+                    valTotal.setText(String.valueOf(rs.getInt(1)));
+                }
+            }
+
+            String dueTaskQuery = "SELECT COUNT(*) FROM tasks WHERE user_id = ?";
+                try (PreparedStatement pstmt = conn.prepareStatement(dueTaskQuery)) {
+                    pstmt.setInt(1, userId);
+                    ResultSet rs = pstmt.executeQuery();
+                    if (rs.next()) {
+                        valDue.setText(String.valueOf(rs.getInt(1)));
+                    }
+                }
+
+            String totalTasksQuery = "SELECT COUNT(*) FROM tasks WHERE user_id = ?";
+            String completedTasksQuery = "SELECT COUNT(*) FROM tasks WHERE user_id = ? AND (status = 'Completed' OR status = 'Done')";
+
+            int totalTask = 0;
+            int completedTask = 0;
+
+            try (PreparedStatement pstmt = conn.prepareStatement(totalTasksQuery)) {
+                pstmt.setInt(1, userId);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) totalTask = rs.getInt(1);
+
+            }
+
+            try (PreparedStatement pstmt = conn.prepareStatement(completedTasksQuery)) {
+                pstmt.setInt(1, userId);
+                ResultSet rs   = pstmt.executeQuery();
+                if (rs.next()) completedTask = rs.getInt(1);
+            }
+
+            if (totalTask > 0) {
+                int rate = (int) Math.round(((double) completedTask / totalTask ) * 100);
+                valCompletion.setText(rate + "%");
+            } else {
+                valCompletion.setText("0%");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            valTotal.setText("0");
+            valDue.setText("0");
+            valCompletion.setText("0%");
+        }
+
+
     }
 
     //
