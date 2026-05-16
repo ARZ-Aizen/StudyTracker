@@ -79,6 +79,12 @@ public class dashboardController {
 
     //
 
+    @FXML private TextField settingsUsernameField;
+    @FXML private PasswordField settingsCurrentPasswordField, settingsNewPasswordField;
+    @FXML private ComboBox<String> settingsSecurityQuestion;
+    @FXML private TextField settingsSecurityAnswerField;
+
+    //
 
     @FXML
     public void initialize() {
@@ -317,7 +323,10 @@ public class dashboardController {
                 showView(scheduleView);
                 loadSchedules();
             }
-            case "Settings" -> showView(settingsView);
+            case "Settings" -> {
+                showView(settingsView);
+                loadSettings();
+            }
             case "About" -> showView(aboutView);
             case "Logout" -> handleLogout();
         }
@@ -623,7 +632,7 @@ public class dashboardController {
                 loadTasks();
                 loadDashboard();
                 loadDashboardTodoTable();
-                loadDashboardTodoTable();
+                loadDashboardGraph();
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -733,6 +742,121 @@ public class dashboardController {
         }
     }
 
+    //
 
+    public void loadSettings() {
+        settingsCurrentPasswordField.clear();
+        settingsNewPasswordField.clear();
+        settingsSecurityAnswerField.clear();
+
+        settingsSecurityQuestion.setItems(FXCollections.observableArrayList(
+                "What was the name of your favorite pet?",
+                "What city were you born in?",
+                "What is your favorite color?"
+        ));
+
+        settingsUsernameField.setText(session.getUsername());
+    }
+
+    @FXML private void handleApplySettings() {
+        String newUsername = settingsUsernameField.getText().trim();
+        String currentPassword = settingsCurrentPasswordField.getText();
+        String newPassword = settingsNewPasswordField.getText();
+        String securityQuestion = settingsSecurityQuestion.getValue();
+        String securityAnswer = settingsSecurityAnswerField.getText().trim();
+
+        Window owner = settingsUsernameField.getScene().getWindow();
+
+        if (newUsername.isBlank()) {
+            alerts.show(Alert.AlertType.WARNING, owner, "Validation Error", "Username must not be empty.");
+            return;
+        }
+
+        String updateQuery = "UPDATE users SET username = ?, question = COALESCE(?, question), answers = COALESCE(?, answers) WHERE user_id = ?";
+
+        try (Connection conn = databaseConnectionManager.getConnection()) {
+
+            if (!newPassword.isEmpty()) {
+                if (currentPassword.isEmpty()) {
+                    alerts.show(Alert.AlertType.WARNING, owner, "Validation Error", "You must enter your current password to set a new one.");
+                    return;
+                }
+
+                String checkPassQuery = "SELECT user_id FROM users WHERE user_id = ? AND password = ?";
+
+                try (PreparedStatement checkStmt = conn.prepareStatement(checkPassQuery)) {
+                    checkStmt.setInt(1, session.getUserId());
+                    checkStmt.setString(2, currentPassword);
+                    ResultSet rs = checkStmt.executeQuery();
+
+                    if (!rs.next()) {
+                        alerts.show(Alert.AlertType.ERROR, owner, "Security Error", "Current Password is incorrect");
+                        return;
+                    }
+                }
+
+                updateQuery = "UPDATE users SET username = ?, password = ?, question = COALESCE(?, question), answers = COALESCE(?, answers) WHERE user_id = ?";
+            }
+
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+                updateStmt.setString(1, newUsername);
+
+                if (!newPassword.isEmpty()) {
+                    updateStmt.setString(2, newPassword);
+                    updateStmt.setString(3, securityQuestion != null && !securityAnswer.isEmpty() ? securityQuestion : null);
+                    updateStmt.setString(4, !securityAnswer.isEmpty() ? securityAnswer : null);
+                    updateStmt.setInt(5, session.getUserId());
+                } else {
+                    updateStmt.setString(2, securityQuestion !=  null && !securityAnswer.isEmpty() ? securityQuestion : null);
+                    updateStmt.setString(3, !securityAnswer.isEmpty() ? securityAnswer : null);
+                    updateStmt.setInt(4, session.getUserId());
+                }
+
+                updateStmt.executeUpdate();
+
+                session.setUsername(newUsername);
+                helloUserHeader.setText("Hello " + session.getUsername() + "!");
+
+                alerts.show(Alert.AlertType.INFORMATION, owner, "Success", "Settings updated successfully.");
+                loadSettings();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            alerts.show(Alert.AlertType.WARNING, owner, "Database Error", "Could not update settings");
+        }
+
+
+    }
+
+    @FXML
+    private void handleDeleteAccount() {
+        Window owner = settingsUsernameField.getScene().getWindow();
+
+        boolean confirmed = alerts.showConfirmation(
+                owner,
+                "CRITICAL: Delete Account",
+                "Are you absolutely sure you want to delete your account? All tasks, courses, and schedules will be permanently lost. This CANNOT be undone."
+        );
+
+        if (confirmed) {
+            String sql = "DELETE FROM users WHERE user_id = ?";
+
+            try (Connection conn = databaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setInt(1, session.getUserId());
+                pstmt.executeUpdate();
+
+                alerts.show(Alert.AlertType.INFORMATION, owner, "Account Deleted", "Your account has been successfully deleted.");
+                handleLogout();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                alerts.show(Alert.AlertType.ERROR, owner, "Error", "Failed to delete account. Please clear your tasks and subjects first.");
+            }
+        }
+    }
 }
 

@@ -161,7 +161,7 @@
                <children>
 
                   <!-- HOME VIEW -->
-                  <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="homeView" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -423,7 +423,7 @@
                   </AnchorPane>
 
                   <!-- SETTINGS VIEW -->
-                  <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0" visible="false">
+                  <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -462,7 +462,7 @@
                                                          <Font name="Inter Semi Bold" size="14.0" />
                                                       </font>
                                                    </Label>
-                                                   <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
+                                                   <TextField fx:id="settingsUsernameField" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                 </VBox>
 
                                                 <HBox spacing="20.0">
@@ -473,7 +473,7 @@
                                                                <Font name="Inter Semi Bold" size="14.0" />
                                                             </font>
                                                          </Label>
-                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
+                                                         <PasswordField fx:id="settingsCurrentPasswordField" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                                                          <Label style="-fx-font-weight: bold;" styleClass="primary-text" text="New Password">
@@ -481,7 +481,7 @@
                                                                <Font name="Inter Semi Bold" size="14.0" />
                                                             </font>
                                                          </Label>
-                                                         <PasswordField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
+                                                         <PasswordField fx:id="settingsNewPasswordField" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                    </children>
                                                 </HBox>
@@ -501,7 +501,7 @@
                                                                <Font name="Inter Regular" size="12.0" />
                                                             </font>
                                                          </Label>
-                                                         <ComboBox maxWidth="1.7976931348623157E308" prefHeight="38.0" promptText="Choose a question..." style="-fx-background-radius: 6;" styleClass="custom-input" />
+                                                         <ComboBox fx:id="settingsSecurityQuestion" maxWidth="1.7976931348623157E308" prefHeight="38.0" promptText="Choose a question..." style="-fx-background-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                       <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                                                          <Label styleClass="sub-label" text="Your Answer">
@@ -509,7 +509,7 @@
                                                                <Font name="Inter Regular" size="12.0" />
                                                             </font>
                                                          </Label>
-                                                         <TextField maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
+                                                         <TextField fx:id="settingsSecurityAnswerField" maxWidth="1.7976931348623157E308" prefHeight="38.0" style="-fx-background-radius: 6; -fx-border-radius: 6;" styleClass="custom-input" />
                                                       </VBox>
                                                    </children>
                                                 </HBox>
@@ -519,7 +519,7 @@
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                    <children>
-                                                      <Button fx:id="btnApplyChanges" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Apply Changes">
+                                                      <Button fx:id="btnApplyChanges" mnemonicParsing="false" onAction="#handleApplySettings" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #a16262; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Apply Changes">
                                                          <font>
                                                             <Font name="Inter Regular" size="14.0" />
                                                          </font>
@@ -547,7 +547,7 @@
                                                             </Label>
                                                          </children>
                                                       </VBox>
-                                                      <Button fx:id="btnDeleteAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e11d48; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete Account">
+                                                      <Button fx:id="btnDeleteAccount" mnemonicParsing="false" onAction="#handleDeleteAccount" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e11d48; -fx-text-fill: white; -fx-background-radius: 5px; -fx-cursor: hand;" text="Delete Account">
                                                          <font>
                                                             <Font name="Inter Regular" size="14.0" />
                                                          </font>

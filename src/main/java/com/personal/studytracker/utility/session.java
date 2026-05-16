@@ -14,6 +14,10 @@ public class session {
         username = name;
     }
 
+    public static void setUsername (String name) {
+        username = name;
+    }
+
     public static int getUserId() { return userId; }
     public static String getUsername() { return username; }
     public static void clear() { userId = 0; username = null; }
