@@ -79,35 +79,34 @@ public class dashboardController {
 
     //
 
-    @FXML private TextField settingsUsernameField;
+    @FXML private TextField settingsUsernameField, settingsSecurityAnswerField;
     @FXML private PasswordField settingsCurrentPasswordField, settingsNewPasswordField;
     @FXML private ComboBox<String> settingsSecurityQuestion;
-    @FXML private TextField settingsSecurityAnswerField;
 
     //
 
-    @FXML
-    public void initialize() {
+    @FXML public void initialize() {
         //
+
         allViews = List.of(homeView, courseView, taskView, scheduleView, settingsView, aboutView);
         allButtons = List.of(btnHome, btnCourses, btnTasks, btnSchedule, btnSettings, btnAbout);
 
         //
+
         helloUserHeader.setText("Hello, " + session.getUsername() + "!");
 
         //
+
         allViews.forEach(view -> view.setVisible(false));
         homeView.setVisible(true);
         highlightButton(btnHome);
         loadDashboard();
         loadDashboardGraph();
         loadDashboardTodoTable();
-
-        //
-
         setupEditableTable();
 
         //
+
         mainStackPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             double w = newVal.doubleValue();
 
@@ -292,15 +291,12 @@ public class dashboardController {
 
     //
 
-    @FXML
-    private void handleMenu(ActionEvent event) {
+    @FXML private void handleMenu(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        String menuText = clickedButton.getText();
-
-        allViews.forEach(view -> view.setVisible(false));
-        allButtons.forEach(this::resetButton);
-
-        highlightButton(clickedButton);
+            String menuText = clickedButton.getText();
+            allViews.forEach(view -> view.setVisible(false));
+            allButtons.forEach(this::resetButton);
+            highlightButton(clickedButton);
 
         switch (menuText) {
             case "Home" -> {
@@ -317,7 +313,6 @@ public class dashboardController {
                 showView(taskView);
                 loadTasks();
                 setupEditableTable();
-
             }
             case "Schedule" -> {
                 showView(scheduleView);
@@ -381,8 +376,7 @@ public class dashboardController {
         btn.setStyle("-fx-background-color: transparent; -fx-text-fill: black; -fx-cursor: hand;");
     }
 
-    @FXML
-    private void handleLogout() {
+    @FXML private void handleLogout() {
         session.clear();
         Stage stage = (Stage) btnHome.getScene().getWindow();
         stage.setMaximized(false);
@@ -524,8 +518,7 @@ public class dashboardController {
 
     //
 
-    @FXML
-    private void courseAddButton() {
+    @FXML private void courseAddButton() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/course-add-view.fxml"));
             Parent root = loader.load();
@@ -545,7 +538,6 @@ public class dashboardController {
 
     public void loadCourse() {
         subjectListContainer.getChildren().clear();
-
         String query = "SELECT subject, code FROM subject WHERE user_id = ?";
         try (Connection conn = databaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -575,8 +567,7 @@ public class dashboardController {
 
     //
 
-    @FXML
-    private void addTaskButton() {
+    @FXML private void addTaskButton() {
         String sql = "INSERT INTO tasks (user_id, task_name, status) VALUES (?, 'New Task', 'To Do')";
 
         try (Connection conn = databaseConnectionManager.getConnection();
@@ -607,8 +598,7 @@ public class dashboardController {
         }
     }
 
-    @FXML
-    private void handleDeleteTask() {
+    @FXML private void handleDeleteTask() {
         Task selected = taskTable.getSelectionModel().getSelectedItem();
         if (selected == null) return;
 
@@ -682,8 +672,7 @@ public class dashboardController {
 
     //
 
-    @FXML
-    private void scheduleAddButton() {
+    @FXML private void scheduleAddButton() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/personal/studytracker/window/schedule-add-view.fxml"));
             Parent root = loader.load();
@@ -840,20 +829,53 @@ public class dashboardController {
         );
 
         if (confirmed) {
-            String sql = "DELETE FROM users WHERE user_id = ?";
+            int userId = session.getUserId();
 
-            try (Connection conn = databaseConnectionManager.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            String deleteTasks = "DELETE FROM tasks WHERE user_id = ?";
+            String deleteSchedules = "DELETE FROM schedule WHERE user_id = ?";
+            String deleteSubjects = "DELETE FROM subject WHERE user_id = ?";
+            String deleteUser = "DELETE FROM users WHERE user_id = ?";
 
-                pstmt.setInt(1, session.getUserId());
-                pstmt.executeUpdate();
+            try (Connection conn = databaseConnectionManager.getConnection()) {
+                conn.setAutoCommit(false);
 
-                alerts.show(Alert.AlertType.INFORMATION, owner, "Account Deleted", "Your account has been successfully deleted.");
-                handleLogout();
+                try {
+                    try (PreparedStatement pstmt = conn.prepareStatement(deleteTasks)) {
+                        pstmt.setInt(1, userId);
+                        pstmt.executeUpdate();
+                    }
+
+                    try (PreparedStatement pstmt = conn.prepareStatement(deleteSchedules)) {
+                        pstmt.setInt(1, userId);
+                        pstmt.executeUpdate();
+                    }
+
+                    try (PreparedStatement pstmt = conn.prepareStatement(deleteSubjects)) {
+                        pstmt.setInt(1, userId);
+                        pstmt.executeUpdate();
+                    }
+
+                    try (PreparedStatement pstmt = conn.prepareStatement(deleteUser)) {
+                        pstmt.setInt(1, userId);
+                        pstmt.executeUpdate();
+                    }
+
+                    conn.commit();
+
+                    alerts.show(Alert.AlertType.INFORMATION, owner, "Account Deleted", "Your account and all associated data have been permanently deleted.");
+                    handleLogout();
+
+                } catch (SQLException ex) {
+                    conn.rollback();
+                    throw ex;
+
+                } finally {
+                    conn.setAutoCommit(true);
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                alerts.show(Alert.AlertType.ERROR, owner, "Error", "Failed to delete account. Please clear your tasks and subjects first.");
+                alerts.show(Alert.AlertType.ERROR, owner, "Database Error", "A critical error occurred while trying to delete your data.");
             }
         }
     }

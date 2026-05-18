@@ -14,8 +14,12 @@ import java.sql.*;
 
 public class scheduleCard {
 
+    //
+
     @FXML private Label cardScheduleName, cardSchedule;
     @FXML private Button btnEdit, btnDelete;
+
+    //
 
     private int currentScheduleId;
     private Runnable refreshCallback;

@@ -24,8 +24,7 @@ public class newPasswordController {
         this.recoveringUserId = id;
     }
 
-    @FXML
-    private void handleResetPassword() {
+    @FXML private void handleResetPassword() {
         String newPass = newPasswordField.getText();
         String confirmPass = confirmPasswordField.getText();
         Window owner = newPasswordField.getScene().getWindow();
@@ -69,8 +68,7 @@ public class newPasswordController {
         }
     }
 
-    @FXML
-    private void handleCancel() {
+    @FXML private void handleCancel() {
         Parent root = newPasswordField.getScene().getRoot();
         transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
     }

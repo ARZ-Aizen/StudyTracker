@@ -32,10 +32,4 @@ public class Task {
     public void setPriority(String value) { this.priority.set(value); }
     public void setStatus(String value) { this.status.set(value); }
 
-    public IntegerProperty idProperty() { return id; }
-    public StringProperty nameProperty() { return name; }
-    public StringProperty subjectProperty() { return subject; }
-    public StringProperty deadlineProperty() { return deadline; }
-    public StringProperty priorityProperty() { return priority; }
-    public StringProperty statusProperty() { return status; }
 }

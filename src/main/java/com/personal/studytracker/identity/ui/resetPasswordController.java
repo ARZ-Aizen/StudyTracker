@@ -2,7 +2,6 @@ package com.personal.studytracker.identity.ui;
 
 import com.personal.studytracker.config.databaseConnectionManager;
 import com.personal.studytracker.utility.alerts;
-import com.personal.studytracker.utility.session;
 import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

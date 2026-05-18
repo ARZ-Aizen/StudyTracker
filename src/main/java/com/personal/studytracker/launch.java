@@ -9,7 +9,7 @@
 
 
 
-    public class studyTracker extends Application {
+    public class launch extends Application {
 
         @Override
         public void init() throws Exception {
@@ -18,7 +18,7 @@
 
         @Override
         public void start(Stage stage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(studyTracker.class.getResource("identity/ui/login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(launch.class.getResource("identity/ui/login-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Study Tracker - Login");
             stage.setScene(scene);
@@ -28,5 +28,6 @@
 
         public static void main(String[] args) {
             launch();
+
         }
     }

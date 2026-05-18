@@ -22,6 +22,7 @@ public class forgotPasswordController {
 
     @FXML private TextField usernameField;
     @FXML private Button findUsername;
+
     //
 
     @FXML private void handleLogin() {
@@ -77,6 +78,4 @@ public class forgotPasswordController {
             e.printStackTrace();
         }
     }
-
-
 }

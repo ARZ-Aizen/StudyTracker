@@ -39,10 +39,6 @@ public class signupController {
         if (signupCreation(username, password)) {
             alerts.show(AlertType.INFORMATION, createUsername.getScene().getWindow(), "Success", "Account Created Successfully");
             handleLogin();
-
-            Parent root = createUsername.getScene().getRoot();
-            transition.effects(root, "/com/personal/studytracker/identity/ui/login-view.fxml", "Study Tracker - Login", false);
-
         } else {
             alerts.show(AlertType.ERROR, createUsername.getScene().getWindow(), "Error", "Account Creation Failed");
         }

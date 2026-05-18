@@ -24,7 +24,7 @@ public class loginController {
     //
 
     @FXML protected void loginProcess () {
-        String username = usernameField.getText();
+        String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
         if (username.isBlank() || password.isBlank()) {
@@ -55,7 +55,6 @@ public class loginController {
             if (rs.next()) {
                 int id = rs.getInt("user_id");
                 String name = rs.getString("username");
-
                 session.setSession(id, name);
                 return true;
             }

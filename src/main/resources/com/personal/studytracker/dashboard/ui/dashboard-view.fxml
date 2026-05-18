@@ -423,7 +423,7 @@
                   </AnchorPane>
 
                   <!-- SETTINGS VIEW -->
-                  <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0">
+                  <AnchorPane fx:id="settingsView" prefHeight="720.0" prefWidth="845.0" visible="false">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -566,7 +566,7 @@
                   </AnchorPane>
 
                   <!-- ABOUT VIEW -->
-                  <AnchorPane fx:id="aboutView" prefHeight="720.0" prefWidth="845.0" visible="false">
+                  <AnchorPane fx:id="aboutView" prefHeight="720.0" prefWidth="845.0">
                      <children>
                         <VBox spacing="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                            <children>
@@ -597,7 +597,7 @@
                                                 <Font name="Inter Semi Bold" size="28.0" />
                                              </font>
                                           </Label>
-                                          <Label styleClass="sub-label" text="Version 1.0.0">
+                                          <Label styleClass="sub-label" text="Version 1.0a">
                                              <font>
                                                 <Font name="Inter Regular" size="14.0" />
                                              </font>
@@ -630,27 +630,14 @@
                                                             <Font name="Inter Semi Bold" size="15.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label styleClass="sub-label" text="Lead Developer">
+                                                      <Label styleClass="sub-label" text="Developer">
                                                          <font>
                                                             <Font name="Inter Regular" size="12.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
                                                 </VBox>
-                                                <VBox spacing="5.0">
-                                                   <children>
-                                                      <Label style="-fx-font-weight: bold; -fx-text-fill: #a16262;" text="Allyssa Rabago">
-                                                         <font>
-                                                            <Font name="Inter Semi Bold" size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label styleClass="sub-label" text="Co-Developer / UI Designer">
-                                                         <font>
-                                                            <Font name="Inter Regular" size="12.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </VBox>
+                                                <VBox spacing="5.0" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets bottom="10.0" top="10.0" />

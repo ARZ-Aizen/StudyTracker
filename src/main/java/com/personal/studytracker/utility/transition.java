@@ -72,48 +72,6 @@ public class transition {
         combined.play();
     }
 
-    public static void popupEffects(Parent ownerRoot, String fxmlPath, String title) {
-        try {
-            Stage ownerStage = (Stage) ownerRoot.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(transition.class.getResource(fxmlPath));
-            Parent popupRoot = loader.load();
-
-            Stage popupStage = new Stage();
-            popupStage.setTitle(title);
-            popupStage.initStyle(StageStyle.TRANSPARENT);
-            popupStage.initOwner(ownerStage);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-
-            Scene scene = new Scene(popupRoot);
-            scene.setFill(Color.TRANSPARENT);
-            popupStage.setScene(scene);
-            popupStage.setResizable(false);
-
-            BoxBlur blur = new BoxBlur(10, 10, 3);
-
-            popupStage.setOnShowing(ev -> {
-                ownerRoot.setEffect(blur);
-
-                double x = ownerStage.getX() + (ownerStage.getWidth() / 2) - (popupRoot.prefWidth(-1) / 2);
-                double y = ownerStage.getY() + (ownerStage.getHeight() / 2) - (popupRoot.prefHeight(-1) / 2);
-                popupStage.setX(x);
-                popupStage.setY(y);
-            });
-
-            popupStage.setOnHidden(ev -> {
-                ownerRoot.setEffect(null);
-            });
-
-            applyWindowPop(popupRoot);
-            popupStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error loading popup: " + fxmlPath);
-        }
-    }
-
     public static Stage popupWithRoot(Parent ownerRoot, Parent popupRoot, String title) {
         try {
             Stage ownerStage = (Stage) ownerRoot.getScene().getWindow();

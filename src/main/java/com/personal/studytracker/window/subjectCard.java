@@ -7,7 +7,6 @@ import com.personal.studytracker.utility.transition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -66,7 +65,6 @@ public class subjectCard {
     }
 
     @FXML private void deleteCourse() {
-
         boolean proceed = alerts.showConfirmation(btnDelete.getScene().getWindow(), "Delete Subject", "Do you want to delete this subject?");
 
         if (proceed) {
