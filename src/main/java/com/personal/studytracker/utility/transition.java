@@ -41,6 +41,19 @@ public class transition {
         }
     }
 
+    public static void effects(Parent currentRoot, Parent nextRoot, String title, boolean fullscreen) {
+        Stage stage = (Stage) currentRoot.getScene().getWindow();
+
+        Scene scene = new Scene(nextRoot);
+        stage.setScene(scene);
+        stage.setTitle(title);
+
+        stage.setResizable(fullscreen);
+
+        applyWindowPop(nextRoot);
+        stage.show();
+    }
+
     private static void applyWindowPop(Parent root) {
         root.setOpacity(0.0);
         root.setScaleX(0.95);

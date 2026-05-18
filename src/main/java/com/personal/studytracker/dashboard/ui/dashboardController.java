@@ -830,8 +830,7 @@ public class dashboardController {
 
     }
 
-    @FXML
-    private void handleDeleteAccount() {
+    @FXML private void handleDeleteAccount() {
         Window owner = settingsUsernameField.getScene().getWindow();
 
         boolean confirmed = alerts.showConfirmation(
