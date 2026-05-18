@@ -1,6 +1,6 @@
 # StudyTracker
 
-A comprehensive desktop application designed to help students manage their subjects, tasks, and weekly schedules. Built with JavaFX, this application features a sleek, modern user interface and relies on a local SQLite database for fast, offline data storage.
+A comprehensive desktop application designed to help students manage their subjects, tasks, and weekly schedules. Built with JavaFX, this application features a sleek, modern user interface and relies on a local SQLite database for fast, offline storage.
 
 ## 📦 Download & Release
 Don't want to compile the code from source? You can download the latest ready-to-run version directly!
